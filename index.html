@@ -1529,13 +1529,28 @@ footer {
   border: 1px solid rgba(255,255,255,0.55);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
 }
-.msg-sign-inline {
-  display: flex; align-items: center; gap: 6px;
-  margin-top: 8px; padding-top: 7px;
+.msg-transmit {
+  position: relative;
+  margin-top: 8px; padding-top: 7px; height: 15px;
   border-top: 1px solid rgba(255,255,255,0.22);
   font-size: 0.62rem; font-weight: 500; color: rgba(255,255,255,0.72);
 }
-.msg-sign-inline svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.msg-transmit-sending, .msg-transmit-done {
+  position: absolute; left: 0; top: 7px;
+  display: flex; align-items: center; gap: 6px;
+  white-space: nowrap;
+}
+.msg-transmit-sending { opacity: 1; }
+.msg-transmit-done { opacity: 0; }
+.msg-transmit-done .plan-foot-check { width: 13px; height: 13px; }
+.stepper-panel.active .msg-transmit-sending { animation: mstFadeOut 0.4s ease 5.1s both; }
+.stepper-panel.active .msg-transmit-done   { animation: mstFadeIn 0.4s ease 5.1s both; }
+@keyframes mstFadeOut { to { opacity: 0; } }
+@keyframes mstFadeIn  { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .msg-transmit-sending { display: none; }
+  .msg-transmit-done { opacity: 1; animation: none; }
+}
 .stepper-panel.active .msg.pd-f1 { animation: pdFloatIn 0.5s cubic-bezier(0.34,1.4,0.64,1) 0.4s both; }
 .stepper-panel.active .msg.pd-f2 { animation: pdFloatIn 0.5s cubic-bezier(0.34,1.4,0.64,1) 2.1s both; }
 .stepper-panel.active .msg.pd-f3 { animation: pdFloatIn 0.5s cubic-bezier(0.34,1.4,0.64,1) 4.3s both; }
@@ -2715,9 +2730,12 @@ footer {
 
           <div class="msg msg-patient pd-f3" style="top:53%;right:16%;max-width:198px">
             38,8 °C. Il tousse mais il respire normalement.
-            <div class="msg-sign-inline">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
-              <span>Échange revu par le Dr Pavesi</span>
+            <div class="msg-transmit">
+              <span class="msg-transmit-sending">Transmission au Dr Pavesi…</span>
+              <span class="msg-transmit-done">
+                <span class="plan-foot-check"><svg viewBox="0 0 10 8" width="7" height="7" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span>Transmis au Dr Pavesi</span>
+              </span>
             </div>
           </div>
         </div>
