@@ -2708,16 +2708,16 @@ footer {
         <div class="sp-scene">
           <div class="sp-scene-photo"><img src="etape5famille.jpg" alt="Une mère consulte Primary depuis chez elle avec ses enfants" style="object-position:60% 12%" /></div>
 
-          <!-- bulles de conversation posées sur la scène (fil resserré) -->
-          <div class="msg msg-patient pd-f1" style="top:14%;right:16%;max-width:184px">Mon fils a de la fièvre depuis hier soir.</div>
-
-          <div class="msg msg-amia pd-f2" style="top:32%;right:24%;max-width:196px">Quelle est sa température ? Respire-t-il normalement ?</div>
-
-          <div class="msg msg-patient pd-f3" style="top:53%;right:16%;max-width:198px">
-            38,8 °C. Il tousse mais il respire normalement.
-            <div class="msg-sign-inline">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
-              <span>Échange revu par le Dr Pavesi</span>
+          <!-- badge unique : l'échange est suivi par un médecin (la conversation elle-même est sur l'écran du téléphone) -->
+          <div class="pd-float pd-f1" style="bottom:8%;left:6%;width:210px">
+            <div class="pd-notif">
+              <div class="pd-notif-icon pd-notif-icon-purple">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
+              </div>
+              <div>
+                <div class="pd-notif-title">Échange revu par un médecin</div>
+                <div class="pd-notif-sub">Dr Pavesi</div>
+              </div>
             </div>
           </div>
         </div>
