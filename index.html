@@ -1529,27 +1529,29 @@ footer {
   border: 1px solid rgba(255,255,255,0.55);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
 }
-.msg-transmit {
-  position: relative;
-  margin-top: 8px; padding-top: 7px; height: 15px;
-  border-top: 1px solid rgba(255,255,255,0.22);
-  font-size: 0.62rem; font-weight: 500; color: rgba(255,255,255,0.72);
-}
+/* Statut de transmission : élément autonome, hors bulle — marque un changement d'état du parcours, pas une métadonnée de message */
+.msg-transmit { position: absolute; opacity: 0; }
 .msg-transmit-sending, .msg-transmit-done {
-  position: absolute; left: 0; top: 7px;
-  display: flex; align-items: center; gap: 6px;
-  white-space: nowrap;
+  position: absolute; top: 0; right: 0;
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  padding: 7px 13px 7px 10px; border-radius: 20px;
+  background: rgba(255,255,255,0.82);
+  border: 1px solid rgba(255,255,255,0.55);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 28px rgba(38,18,34,0.16);
+  font-size: 0.68rem; font-weight: 500; color: var(--muted);
 }
 .msg-transmit-sending { opacity: 1; }
 .msg-transmit-done { opacity: 0; }
-.msg-transmit-done .plan-foot-check { width: 13px; height: 13px; }
-.stepper-panel.active .msg-transmit-sending { animation: mstFadeOut 0.4s ease 5.1s both; }
-.stepper-panel.active .msg-transmit-done   { animation: mstFadeIn 0.4s ease 5.1s both; }
+.msg-transmit-done .plan-foot-check { width: 14px; height: 14px; }
+.stepper-panel.active .msg-transmit { animation: pdFloatIn 0.5s cubic-bezier(0.34,1.4,0.64,1) 4.9s both; }
+.stepper-panel.active .msg-transmit .msg-transmit-sending { animation: mstFadeOut 0.4s ease 5.7s both; }
+.stepper-panel.active .msg-transmit .msg-transmit-done   { animation: mstFadeIn 0.4s ease 5.7s both; }
 @keyframes mstFadeOut { to { opacity: 0; } }
 @keyframes mstFadeIn  { to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
-  .msg-transmit-sending { display: none; }
-  .msg-transmit-done { opacity: 1; animation: none; }
+  .msg-transmit-sending { opacity: 0; }
+  .msg-transmit-done { opacity: 1; }
 }
 .stepper-panel.active .msg.pd-f1 { animation: pdFloatIn 0.5s cubic-bezier(0.34,1.4,0.64,1) 0.4s both; }
 .stepper-panel.active .msg.pd-f2 { animation: pdFloatIn 0.5s cubic-bezier(0.34,1.4,0.64,1) 2.1s both; }
@@ -2730,13 +2732,15 @@ footer {
 
           <div class="msg msg-patient pd-f3" style="top:53%;right:16%;max-width:198px">
             38,8 °C. Il tousse mais il respire normalement.
-            <div class="msg-transmit">
-              <span class="msg-transmit-sending">Transmission au Dr Pavesi…</span>
-              <span class="msg-transmit-done">
-                <span class="plan-foot-check"><svg viewBox="0 0 10 8" width="7" height="7" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                <span>Transmis au Dr Pavesi</span>
-              </span>
-            </div>
+          </div>
+
+          <!-- statut de transmission : autonome, hors bulle — marque le passage de « échange » à « médecin dans la boucle » -->
+          <div class="msg-transmit" style="top:78%;right:16%">
+            <span class="msg-transmit-sending">Transmission au Dr Pavesi…</span>
+            <span class="msg-transmit-done">
+              <span class="plan-foot-check"><svg viewBox="0 0 10 8" width="7" height="7" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span>Transmis au Dr Pavesi</span>
+            </span>
           </div>
         </div>
         <div class="sp-text">
