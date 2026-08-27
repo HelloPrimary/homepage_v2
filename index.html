@@ -325,6 +325,64 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
   letter-spacing: -0.01em;
 }
 
+.bloc-proof {
+  background: #FAF8F5;
+  padding: 0 6% 128px;
+}
+
+.proof-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.proof-stat {
+  flex: 1;
+  text-align: center;
+  padding: 0 3rem;
+}
+
+.proof-stat + .proof-stat {
+  border-left: 1px solid rgba(16,16,16,0.1);
+}
+
+.proof-number {
+  font-family: var(--f);
+  font-size: clamp(1.9rem, 2.6vw, 2.5rem);
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.proof-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.proof-sublabel {
+  margin-top: 8px;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .bloc-proof { padding: 0 1.5rem 72px; }
+  .proof-inner { flex-direction: column; gap: 40px; }
+  .proof-stat { padding: 0; }
+  .proof-stat + .proof-stat { border-left: none; }
+}
+
 .vision-statement em {
   color: var(--muted);
   font-style: normal;
@@ -2428,6 +2486,25 @@ footer {
       </ul>
     </div>
 
+  </div>
+</section>
+
+<!-- BLOC 3 BIS · PROOF BAR -->
+<section class="bloc-proof">
+  <div class="proof-inner">
+    <div class="proof-stat">
+      <p class="proof-number">+100 000</p>
+      <p class="proof-label">Patients</p>
+    </div>
+    <div class="proof-stat">
+      <p class="proof-number">50</p>
+      <p class="proof-label">Soignants</p>
+    </div>
+    <div class="proof-stat">
+      <p class="proof-number">10</p>
+      <p class="proof-label">Cabinets</p>
+      <p class="proof-sublabel">Paris · Lyon · Bordeaux · Saint-Mandé</p>
+    </div>
   </div>
 </section>
 
