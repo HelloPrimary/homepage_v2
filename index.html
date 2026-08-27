@@ -1004,6 +1004,29 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
   background: #111;
   transform: scale(1.08);
   transform-origin: center;
+  transition: transform 0.6s ease;
+}
+.reel-card:hover .reel-video { transform: scale(1.13); }
+
+/* Affordance vidéo : les visuels intègrent déjà durée, son et légende ; seul le signal « lecture » manque */
+.reel-play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px);
+  border: 1px solid rgba(255,255,255,0.6);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0.9;
+  transition: transform 0.35s ease, background 0.35s ease, opacity 0.35s ease;
+}
+.reel-play svg { width: 13px; height: 13px; margin-left: 2px; fill: #fff; }
+.reel-card:hover .reel-play {
+  transform: translate(-50%, -50%) scale(1.12);
+  background: rgba(255,255,255,0.34);
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reel-video, .reel-play { transition: none; }
 }
 
 /* ── BLOC 6 — CTA FINAL ────────────────────────── */
@@ -2763,28 +2786,35 @@ footer {
 <!-- BLOC 5 · REELS MÉDECINS — une plateforme de contenu, pas une section « équipe » -->
 <section class="bloc-medecins">
   <div class="medecins-head">
-    <h2 class="medecins-title">Une autre idée de la médecine générale</h2>
+    <span class="prog-eyebrow">Vos médecins</span>
   </div>
 
   <!-- Placeholders en <img> (pas de vidéo réelle encore) : à la réception des .mp4, remplacer chaque <img class="reel-video" src="..."> par <video class="reel-video" muted loop autoplay playsinline src="..."> — le CSS .reel-video (object-fit: cover) s'applique déjà correctement à une vidéo qui joue. -->
+  <!-- Affordance vidéo : dégradé bas + play + durée + icône son, pour que le format se lise comme une vidéo à écouter, pas une simple photo -->
   <div class="reels-rail" id="reelsTrack">
     <div class="reel-card">
       <img class="reel-video" src="scene1.jpg" alt="Un médecin Primary : « Ce que j'aime, c'est prendre le temps d'expliquer. »">
+      <span class="reel-play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 L10 6 L0 12 Z"/></svg></span>
     </div>
     <div class="reel-card">
       <img class="reel-video" src="scene4.jpg" alt="Un médecin Primary marche dans le couloir du cabinet : « Le cabinet, c'est aussi une équipe, et beaucoup d'échanges en coulisses. »">
+      <span class="reel-play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 L10 6 L0 12 Z"/></svg></span>
     </div>
     <div class="reel-card">
       <img class="reel-video" src="scene2.jpg" alt="Un médecin Primary : « On voit des choses incroyables au quotidien, et c'est ça qui est génial. »">
+      <span class="reel-play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 L10 6 L0 12 Z"/></svg></span>
     </div>
     <div class="reel-card">
       <img class="reel-video" src="scene3.jpg" alt="Un médecin Primary en consultation, champ-contrechamp : « Vous me dites ce qui vous inquiète, et on va voir ça ensemble. »" style="object-position:68% 38%">
+      <span class="reel-play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 L10 6 L0 12 Z"/></svg></span>
     </div>
     <div class="reel-card">
       <img class="reel-video" src="scene5.jpg" alt="Gros plan sur un médecin Primary : « La médecine générale, c'est la médecine de la vie réelle. »">
+      <span class="reel-play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 L10 6 L0 12 Z"/></svg></span>
     </div>
     <div class="reel-card">
       <img class="reel-video" src="scene6.jpg" alt="Un médecin Primary : « On réfléchit, on prend du recul, et on décide avec le patient. »">
+      <span class="reel-play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 L10 6 L0 12 Z"/></svg></span>
     </div>
   </div>
 </section>
