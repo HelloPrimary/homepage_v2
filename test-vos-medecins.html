@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test — Section Vos médecins</title>
+<style>
+@font-face {
+  font-family: 'Brockmann';
+  src: url('fonts/Brockmann-Regular.otf') format('opentype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Brockmann';
+  src: url('fonts/Brockmann-SemiBold.otf') format('opentype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Brockmann';
+  src: url('fonts/Brockmann-SemiBold.otf') format('opentype');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { -webkit-font-smoothing: antialiased; }
+
+:root {
+  --bordeaux: #3a1c33;
+  --ink: #101010;
+  --muted: #5e6266;
+  --f: 'Brockmann', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+}
+
+body {
+  font-family: var(--f);
+  background: #fff;
+  color: var(--ink);
+}
+
+/* Bandeau de contexte — repère visuel de test, à retirer à l'intégration */
+.maquette-tag {
+  background: var(--bordeaux); color: rgba(255,255,255,0.8);
+  text-align: center; font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 12px 1rem;
+}
+
+/* ── Section Vos médecins ───────────────────────────── */
+.medecins-test {
+  background: #F7F6F3;
+  padding: 120px 6% 100px;
+}
+
+.medecins-test-eyebrow {
+  display: block;
+  text-align: center;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 64px;
+}
+
+.medecins-wall {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 28px;
+}
+
+/* Portrait — pensé comme une "frame" : le même gabarit pourra accueillir
+   un short vidéo vertical demain (ratio, radius et hover déjà prêts pour ça) */
+.med-card {
+  position: relative;
+  flex: 1 1 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #EFE6D3;
+  box-shadow: 0 18px 44px rgba(38,18,34,0.10);
+  transition: transform 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.5s ease;
+}
+.med-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 60px rgba(38,18,34,0.18);
+}
+
+.med-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+.med-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 15%;
+  display: block;
+  transform: scale(1.02);
+  transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.med-card:hover .med-photo img { transform: scale(1.08); }
+
+.med-caption {
+  padding: 16px 4px 4px;
+  text-align: center;
+}
+.med-name {
+  display: block;
+  font-size: 0.95rem; font-weight: 600;
+  color: var(--ink); letter-spacing: -0.01em;
+}
+.med-role {
+  display: block;
+  font-size: 0.74rem; color: var(--muted);
+  margin-top: 3px;
+}
+
+/* Rythme éditorial : tailles et décalages volontairement irréguliers, pas une grille uniforme */
+.med-card--1 { flex-basis: 27%; }
+.med-card--2 { flex-basis: 21%; margin-bottom: 44px; }
+.med-card--3 { flex-basis: 24%; }
+.med-card--4 { flex-basis: 19.5%; margin-bottom: 18px; }
+
+@media (max-width: 860px) {
+  .medecins-test { padding: 72px 1.5rem 72px; }
+  .medecins-test-eyebrow { margin-bottom: 40px; }
+  .medecins-wall {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    gap: 18px;
+    padding-bottom: 8px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .medecins-wall::-webkit-scrollbar { display: none; }
+  .med-card { flex: 0 0 auto !important; width: 62vw; margin-bottom: 0 !important; scroll-snap-align: start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .med-card, .med-photo img { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="maquette-tag">Test — Section « Vos médecins » (statique) · Maquette séparée, n'affecte pas la homepage</div>
+
+<section class="medecins-test">
+  <span class="medecins-test-eyebrow">Vos médecins</span>
+  <div class="medecins-wall">
+    <figure class="med-card med-card--1">
+      <div class="med-photo"><img src="medecin-test-1.png" alt="Dr Camille Roussel, médecin généraliste chez Primary"></div>
+      <figcaption class="med-caption">
+        <span class="med-name">Dr Camille Roussel</span>
+        <span class="med-role">Médecin généraliste</span>
+      </figcaption>
+    </figure>
+    <figure class="med-card med-card--2">
+      <div class="med-photo"><img src="medecin-test-2.png" alt="Dr Élise Fontaine, médecin généraliste chez Primary"></div>
+      <figcaption class="med-caption">
+        <span class="med-name">Dr Élise Fontaine</span>
+        <span class="med-role">Médecin généraliste</span>
+      </figcaption>
+    </figure>
+    <figure class="med-card med-card--3">
+      <div class="med-photo"><img src="medecin-test-3.png" alt="Dr Thomas Berger, médecin généraliste chez Primary"></div>
+      <figcaption class="med-caption">
+        <span class="med-name">Dr Thomas Berger</span>
+        <span class="med-role">Médecin généraliste</span>
+      </figcaption>
+    </figure>
+    <figure class="med-card med-card--4">
+      <div class="med-photo"><img src="medecin-test-4.png" alt="Dr Julien Marchand, médecin généraliste chez Primary"></div>
+      <figcaption class="med-caption">
+        <span class="med-name">Dr Julien Marchand</span>
+        <span class="med-role">Médecin généraliste</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+</body>
+</html>
