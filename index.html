@@ -1213,10 +1213,10 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
 }
 
 /* ── BLOC 6 — CTA FINAL ────────────────────────── */
-/* CTA final — dernière page éditoriale, pas un bandeau de conversion générique */
+/* CTA final — dernière page éditoriale, pas un second hero */
 .bloc-cta {
   background: var(--gold);
-  padding: 220px 6% 170px;
+  padding: 150px 6% 130px;
   text-align: left;
   border-radius: 48px 48px 0 0;
   margin-top: -48px;
@@ -1228,7 +1228,7 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
   max-width: 1180px;
   margin: 0 auto;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 48px;
   flex-wrap: wrap;
@@ -1237,35 +1237,31 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
 .cta-title {
   font-family: var(--f);
   font-weight: 600;
-  font-size: clamp(2.6rem, 6vw, 5.2rem);
+  font-size: clamp(2rem, 3.8vw, 3.3rem);
   color: var(--ink);
-  line-height: 0.98;
-  letter-spacing: -0.03em;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
   text-wrap: balance;
   margin: 0;
 }
 
 .cta-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  display: inline-block;
   font-family: var(--f);
+  font-size: 0.95rem;
   font-weight: 600;
-  font-size: 1.1rem;
-  color: var(--ink);
+  color: #fff;
+  background: var(--bordeaux);
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
   text-decoration: none;
-  padding-bottom: 7px;
-  border-bottom: 1.5px solid rgba(16,16,16,0.35);
   white-space: nowrap;
-  transition: border-color 0.3s ease, gap 0.3s ease;
 }
-.cta-link:hover { border-color: var(--ink); gap: 15px; }
-.cta-arrow { display: inline-block; transition: transform 0.3s ease; }
-.cta-link:hover .cta-arrow { transform: translateX(4px); }
 
 @media (max-width: 768px) {
-  .bloc-cta { padding: 120px 1.5rem 100px; }
-  .cta-inner { flex-direction: column; align-items: flex-start; gap: 32px; }
+  .bloc-cta { padding: 90px 1.5rem 90px; }
+  .cta-inner { flex-direction: column; align-items: flex-start; gap: 28px; }
 }
 
 /* ── FOOTER (repris de helloprimary.care, sans le bandeau titre + CTA) ── */
@@ -3136,7 +3132,7 @@ footer {
 <section class="bloc-cta">
   <div class="cta-inner">
     <h2 class="cta-title">Prenez soin<br>de la suite.</h2>
-    <a class="cta-link" href="#">Commencer mon suivi <span class="cta-arrow">→</span></a>
+    <a class="cta-link" href="#">Commencer mon suivi →</a>
   </div>
 </section>
 
