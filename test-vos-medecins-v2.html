@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test v2 — Galerie horizontale Vos médecins</title>
+<style>
+@font-face {
+  font-family: 'Brockmann';
+  src: url('fonts/Brockmann-Regular.otf') format('opentype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Brockmann';
+  src: url('fonts/Brockmann-SemiBold.otf') format('opentype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Brockmann';
+  src: url('fonts/Brockmann-SemiBold.otf') format('opentype');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { -webkit-font-smoothing: antialiased; }
+
+:root {
+  --bordeaux: #3a1c33;
+  --ink: #101010;
+  --muted: #5e6266;
+  --f: 'Brockmann', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+}
+
+body { font-family: var(--f); background: #fff; color: var(--ink); }
+
+.maquette-tag {
+  background: var(--bordeaux); color: rgba(255,255,255,0.8);
+  text-align: center; font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 12px 1rem;
+}
+
+/* ── Section Vos médecins — v2, galerie horizontale éditoriale ───────── */
+.medecins-v2 {
+  background: #F7F6F3;
+  padding: 120px 0 110px;
+  overflow: hidden;
+}
+
+.medecins-v2-eyebrow {
+  display: block;
+  text-align: center;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 56px;
+}
+
+/* Rail : cadres uniformes (aucune hiérarchie de taille), débordement visible
+   pour suggérer la continuité — pas de pagination, pas de flèches, pas de dots */
+.med-rail-wrap { position: relative; }
+
+.med-rail {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  padding: 0 6%;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.med-rail::-webkit-scrollbar { display: none; }
+.med-rail.dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+
+/* Masques latéraux : le dernier portrait visible se fond doucement dans le fond,
+   au lieu d'être coupé net — la lecture "ça continue" reste discrète */
+.med-rail-wrap::before, .med-rail-wrap::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 8%;
+  pointer-events: none; z-index: 2;
+}
+.med-rail-wrap::before { left: 0; background: linear-gradient(to right, #F7F6F3, rgba(247,246,243,0)); }
+.med-rail-wrap::after  { right: 0; background: linear-gradient(to left, #F7F6F3, rgba(247,246,243,0)); }
+
+/* Portrait — même gabarit pour tous : pas de card, pas d'ombre lourde,
+   pensé pour accueillir un short vidéo vertical demain sans rien redessiner */
+.med-frame {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(190px, 15.5vw, 240px);
+  aspect-ratio: 3 / 4;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #EFE6D3;
+  scroll-snap-align: start;
+}
+.med-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 15%;
+  display: block;
+  transform: scale(1.02);
+  transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.med-frame:hover img { transform: scale(1.06); }
+
+/* Prénom seul, discret — pas de "Médecin généraliste" répété 8 fois, pas de cartouche */
+.med-first-name {
+  position: absolute; left: 12px; bottom: 10px;
+  font-size: 0.72rem; font-weight: 500;
+  color: rgba(255,255,255,0.92);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.35);
+}
+
+@media (max-width: 640px) {
+  .medecins-v2 { padding: 80px 0 80px; }
+  .medecins-v2-eyebrow { margin-bottom: 36px; }
+  .med-frame { width: 42vw; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .med-frame img { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="maquette-tag">Test v2 — Galerie horizontale « Vos médecins » · Maquette séparée, n'affecte pas la homepage</div>
+
+<section class="medecins-v2">
+  <span class="medecins-v2-eyebrow">Vos médecins</span>
+
+  <!-- 6 vrais portraits médecins Primary -->
+  <div class="med-rail-wrap">
+    <div class="med-rail" id="medRail">
+      <div class="med-frame"><img src="medecin-servane-lacoste.png" alt="Dr Servane Lacoste, médecin Primary"><span class="med-first-name">Servane</span></div>
+      <div class="med-frame"><img src="medecin-pierre-henri-gorioux.png" alt="Dr Pierre-Henri Gorioux, médecin Primary"><span class="med-first-name">Pierre-Henri</span></div>
+      <div class="med-frame"><img src="medecin-arnaud-de-milleret.png" alt="Dr Arnaud de Milleret, médecin Primary"><span class="med-first-name">Arnaud</span></div>
+      <div class="med-frame"><img src="medecin-romane-vidcoq.png" alt="Dr Romane Vidcoq, médecin Primary"><span class="med-first-name">Romane</span></div>
+      <div class="med-frame"><img src="medecin-adrien-tafforet.png" alt="Dr Adrien Tafforet, médecin Primary"><span class="med-first-name">Adrien</span></div>
+      <div class="med-frame"><img src="medecin-they-kong.png" alt="Dr They Kong, médecin Primary"><span class="med-first-name">They</span></div>
+    </div>
+  </div>
+</section>
+
+<script>
+// Défilement horizontal au drag (souris) — geste naturel, pas de flèches
+(function() {
+  const rail = document.getElementById('medRail');
+  let isDown = false, startX, scrollLeft;
+  rail.addEventListener('mousedown', (e) => {
+    isDown = true; rail.classList.add('dragging');
+    startX = e.pageX - rail.offsetLeft; scrollLeft = rail.scrollLeft;
+  });
+  window.addEventListener('mouseup', () => { isDown = false; rail.classList.remove('dragging'); });
+  rail.addEventListener('mouseleave', () => { isDown = false; rail.classList.remove('dragging'); });
+  rail.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - rail.offsetLeft;
+    rail.scrollLeft = scrollLeft - (x - startX);
+  });
+})();
+</script>
+
+</body>
+</html>
