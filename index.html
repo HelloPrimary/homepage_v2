@@ -120,7 +120,9 @@ nav.nav-scrolled .nav-logo-mark path { fill: var(--bordeaux); }
   font-weight: 500;
   transition: color 0.4s ease;
 }
+.nav-links a:hover { color: #fff; }
 nav.nav-scrolled .nav-links a { color: var(--text); }
+nav.nav-scrolled .nav-links a:hover { color: var(--bordeaux); }
 
 .nav-right {
   display: flex;
@@ -161,7 +163,9 @@ nav.nav-scrolled .lang-switcher .active { color: var(--ink); }
   text-decoration: none;
   transition: color 0.4s ease;
 }
+.btn-secondary:hover { color: #fff; }
 nav.nav-scrolled .btn-secondary { color: var(--text); }
+nav.nav-scrolled .btn-secondary:hover { color: var(--bordeaux); }
 
 .btn-primary {
   font-family: var(--f);
@@ -175,12 +179,15 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(16,16,16,0.16); }
 
 .btn-primary-bordeaux {
   background: var(--bordeaux);
   color: white;
 }
+.btn-primary-bordeaux:hover { box-shadow: 0 10px 24px rgba(38,18,34,0.28); }
 
 /* ── HERO — immersif, éditorial, la lumière au centre du design ── */
 .hero {
@@ -262,7 +269,9 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
   border-radius: 10px;
   padding: 15px 30px;
   text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+.hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.22); }
 
 .hero-btn {
   font-family: var(--f);
@@ -274,7 +283,9 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
   border-radius: 10px;
   padding: 14px 28px;
   cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+.hero-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.22); }
 
 /* ── BLOC 2 — NOTRE VISION (manifeste + engagements fusionnés) ── */
 .bloc-vision {
@@ -1162,7 +1173,9 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
   color: var(--ink);
   letter-spacing: -0.005em;
   -webkit-tap-highlight-color: transparent;
+  transition: color 0.25s ease;
 }
+.faq-q:hover { color: var(--bordeaux); }
 
 .faq-q-mark {
   position: relative;
@@ -1257,7 +1270,9 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
   padding: 15px 30px;
   text-decoration: none;
   white-space: nowrap;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+.cta-link:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(38,18,34,0.3); }
 
 @media (max-width: 768px) {
   .bloc-cta { padding: 90px 1.5rem 90px; }
@@ -1332,7 +1347,7 @@ footer {
   .bloc-vision, .bloc-programme { padding: 60px 1.5rem; }
   .bloc-vision { padding-top: 116px; }
   .bloc-programme { padding-top: 96px; }
-  .bloc-programme .prog-header { margin: 0 auto 2.55rem; }
+  .bloc-programme .prog-header { margin: 0 auto 2.3rem; }
   .bloc-medecins { padding: 60px 0 60px 1.5rem; }
   .medecins-head { padding-right: 1.5rem; }
   .medecins-title { font-size: clamp(1.05rem, 6.5vw, 1.5rem); }
@@ -1342,7 +1357,7 @@ footer {
 }
 /* ── TIMELINE VERTICALE — parcours (remplace le carrousel) ── */
 .bloc-programme { padding: 130px 6% 72px; overflow: visible; }
-.bloc-programme .prog-header { max-width: none; margin: 0 auto 2.55rem; text-align: center; }
+.bloc-programme .prog-header { max-width: none; margin: 0 auto 2.3rem; text-align: center; }
 
 .timeline { position: relative; max-width: 920px; margin: 0 auto; }
 .tl-step {
@@ -1436,7 +1451,7 @@ footer {
 
 /* ── STEPPER — parcours produit (compact, remplace la timeline verticale) ── */
 .bloc-programme { padding: 130px 6% 72px; overflow: visible; }
-.bloc-programme .prog-header { max-width: none; margin: 0 auto 2.55rem; text-align: center; }
+.bloc-programme .prog-header { max-width: none; margin: 0 auto 2.3rem; text-align: center; }
 
 .stepper { max-width: 1080px; margin: 0 auto; }
 .stepper-rail-wrap { max-width: 1080px; margin: 0 auto; }
