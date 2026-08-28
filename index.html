@@ -1264,25 +1264,63 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
   text-underline-offset: 3px;
 }
 
-/* ── FOOTER ────────────────────────────────────── */
+/* ── FOOTER (repris de helloprimary.care, sans le bandeau titre + CTA) ── */
 footer {
-  background: var(--bordeaux-dk);
-  padding: 40px 6%;
+  background: var(--gold);
+  padding: 64px 6% 0;
+}
+
+.footer-wrap { max-width: 1180px; margin: 0 auto; }
+
+.footer-line {
+  height: 1px;
+  background: rgba(16,16,16,0.3);
+  margin-bottom: 48px;
+}
+
+.footer-links {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 64px;
+  padding-bottom: 56px;
+}
+
+.footer-col h4 {
+  font-family: var(--f);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--bordeaux);
+  margin-bottom: 16px;
+}
+
+.footer-col-links { display: flex; flex-direction: column; gap: 10px; }
+
+.footer-col-links a {
+  font-size: 0.85rem;
+  color: var(--bordeaux);
+  text-decoration: none;
+}
+.footer-col-links a:hover { text-decoration: underline; }
+
+.footer-social a {
+  display: inline-flex;
+  width: 32px; height: 32px;
   align-items: center;
+  justify-content: center;
 }
+.footer-social svg { width: 20px; height: 20px; fill: var(--bordeaux); }
 
-.footer-logo {
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: rgba(255,255,255,0.35);
+.footer-wordmark {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: hidden;
 }
+.footer-wordmark path { fill: var(--bordeaux); }
 
-.footer-copy {
-  font-size: 0.65rem;
-  letter-spacing: 0.14em;
-  color: rgba(255,255,255,0.18);
+@media (max-width: 768px) {
+  footer { padding: 48px 1.5rem 0; }
+  .footer-links { gap: 36px; padding-bottom: 40px; }
 }
 
 /* ── UTILITIES ─────────────────────────────────── */
@@ -1547,7 +1585,8 @@ footer {
   overflow: hidden;
   vertical-align: bottom;
   line-height: 1.15;
-  min-width: 3.2em;
+  width: 3.6em;
+  text-align: center;
 }
 .cta-rotating-word {
   display: inline-block;
@@ -3068,7 +3107,7 @@ footer {
 
       <div class="faq-item">
         <button class="faq-q" type="button">
-          <span>Comment poser une question à mon médecin entre deux consultations ?</span>
+          <span>Comment poser une question à mon médecin entre deux consultations ?</span>
           <span class="faq-q-mark"></span>
         </button>
         <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
@@ -3112,8 +3151,58 @@ footer {
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">primary</div>
-  <span class="footer-copy">Paris · Lyon · Bordeaux · Nantes</span>
+  <div class="footer-wrap">
+    <div class="footer-line"></div>
+
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Notre offre</h4>
+        <div class="footer-col-links">
+          <a href="#">Espace patient</a>
+          <a href="#">Programme Primary</a>
+          <a href="#">Pour les médecins</a>
+          <a href="#">Nos cabinets</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>À propos de nous</h4>
+        <div class="footer-col-links">
+          <a href="#">Notre histoire</a>
+          <a href="#">Recrutement</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <div class="footer-col-links">
+          <a href="#">CGU</a>
+          <a href="#">Politique de confidentialité du site</a>
+          <a href="#">Politique de confidentialité de l'application</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <div class="footer-col-links footer-social">
+          <a href="https://www.linkedin.com/company/helloprimary/about/" target="_blank" rel="noreferrer" aria-label="LinkedIn Primary">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.58c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.68H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.11 20.45H3.56V9h3.55v11.45z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <svg class="footer-wordmark" viewBox="0 0 1210 197" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M853.787 197.125C825.363 197.125 804.048 181.798 804.048 154.767C804.048 128.293 822.44 110.736 855.045 108.785L894.803 107.825C894.803 97.514 883.987 84.9555 863.922 84.9555C843.3 84.9555 834.423 96.5222 831.358 105.44L803.49 91.2274C812.129 70.6055 831.358 52.2129 864.799 52.2129C908.829 52.2129 929.73 80.9177 929.73 107.949V197.125H894.896V181.798C887.929 192.666 872.737 197.125 853.787 197.125ZM839.439 153.373C839.439 163.127 847.521 169.258 858.947 169.258C877.618 169.258 895.453 156.996 895.453 139.161L895.487 136.984L857.275 137.21C845.606 137.227 839.439 143.62 839.439 153.373Z"/>
+      <path d="M565.488 197.046V54.8766H600.323V69.9697C606.732 58.2653 620.919 52.1582 638.754 52.1582C657.704 52.1582 672.778 57.7079 681.696 70.527C689.499 60.4947 703.588 52.1583 726.718 52.1583C759.323 52.1583 783.134 73.5924 783.134 101.739V197.046H748.299V112.607C748.299 94.493 736.285 84.9553 720.122 84.9553C702.565 84.9553 691.728 95.6077 691.728 112.607V197.046H656.894V112.607C656.894 94.493 644.876 84.8796 628.713 84.8796C611.157 84.8796 600.323 95.6077 600.323 112.607V197.046H565.488Z"/>
+      <path d="M509.75 197.126V54.9004H544.584V197.126H509.75Z"/>
+      <path d="M396.23 54.8689V197.124H430.412V114.268C430.412 97.5869 441.077 85.008 458.305 85.008C466.971 84.484 475.286 88.5069 480.255 95.6276L481.306 97.135L497.599 60.5575L496.076 59.7811C488.061 55.6945 477.365 52.2113 468.127 52.2113C450.626 52.2113 436.702 60.944 430.412 72.4291V54.8689H396.23Z"/>
+      <path d="M230.457 255.239V54.8746H263.896V71.1927C272.189 60.2248 289.282 52.1947 308.275 52.1947C345.459 52.1947 377.052 79.218 377.052 124.427C377.052 167.229 345.727 197.128 308.275 197.128C289.282 197.128 271.921 188.362 263.896 177.394V255.239H230.457ZM265.12 124.427C265.12 146.898 279.411 163.33 303.22 163.33C327.296 163.33 341.32 146.898 341.32 124.427C341.32 101.689 327.296 85.2569 303.22 85.2569C279.411 85.2569 265.12 101.689 265.12 124.427Z"/>
+      <path d="M950.652 54.8709V197.126H984.834V114.27C984.834 97.5888 995.499 85.0099 1012.73 85.0099C1021.39 84.486 1029.71 88.5089 1034.68 95.6296L1035.73 97.1369L1052.02 60.5595L1050.5 59.7831C1042.48 55.6965 1031.79 52.2132 1022.55 52.2132C1005.05 52.2132 991.124 60.9459 984.834 72.431V54.8709H950.652Z"/>
+      <path d="M1136.58 141.299L1101.73 54.8772L1064.16 54.877L1117.79 187.624L1113.77 197.772L1090.56 255.219L1128.12 255.219L1209.07 54.8772L1171.5 54.8775L1136.58 141.299Z"/>
+      <path d="M527.162 42.6662C515.38 42.6662 505.826 33.1151 505.826 21.3331C505.826 9.55116 515.38 -1.44762e-06 527.162 -9.32617e-07C538.944 -4.17612e-07 548.498 9.55116 548.498 21.3331C548.498 33.1151 538.944 42.6662 527.162 42.6662Z"/>
+      <path d="M66.8488 203.258L99.1467 216.307L123.302 156.523L123.313 156.533L159.121 67.8721L126.823 54.8229L108.966 99.018L44.7125 45.0977L22.3214 71.7824L72.8031 114.146L72.8132 114.139L95.2486 132.97L66.8488 203.258Z"/>
+      <path d="M72.9027 156.388L80.9664 136.593L64.2917 122.574L0.929688 142.69L11.4728 175.891L72.9027 156.388Z"/>
+      <path d="M174.71 154.189L146.643 130.636L132.928 164.602L152.319 180.874L174.71 154.189Z"/>
+    </svg>
+  </div>
 </footer>
 
 <script>
