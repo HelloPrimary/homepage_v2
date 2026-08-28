@@ -967,6 +967,14 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
    le collectif continue hors champ. Pas de pagination, pas de flèches, pas de dots. */
 .med-rail-wrap { position: relative; }
 
+/* La série débute déjà entamée — le premier portrait est en partie hors champ,
+   comme s'il continuait vers la gauche autant que vers la droite */
+.med-rail-wrap::before {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 5%;
+  pointer-events: none; z-index: 2;
+  background: linear-gradient(to right, #F7F6F3, rgba(247,246,243,0));
+}
+
 .med-rail {
   display: flex;
   align-items: flex-start;
@@ -975,7 +983,7 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
   overflow-y: visible;
   scroll-behavior: smooth;
   scroll-snap-type: x proximity;
-  padding: 0 0 6px;
+  padding: 4px 0 6px;
   scrollbar-width: none;
   cursor: grab;
 }
@@ -983,8 +991,12 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
 .med-rail.dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
 
 /* Portrait — même gabarit pour tous, pensé pour accueillir un short vidéo
-   vertical demain sans rien redessiner (ratio, radius et hover déjà prêts) */
+   vertical demain sans rien redessiner (ratio, radius et hover déjà prêts).
+   Seule la position verticale varie, sur 3 paliers très légers — jamais la taille :
+   ça donne du rythme à la série sans jamais suggérer de hiérarchie entre médecins. */
 .med-item { flex: 0 0 auto; scroll-snap-align: start; }
+.med-item.lvl-1 { margin-top: 18px; }
+.med-item.lvl-2 { margin-top: 32px; }
 
 .med-frame {
   position: relative;
@@ -2863,27 +2875,27 @@ footer {
        Gabarit pensé pour accueillir des shorts vidéo verticaux demain sans redessiner la section. -->
   <div class="med-rail-wrap">
     <div class="med-rail" id="medRail">
-      <figure class="med-item">
+      <figure class="med-item lvl-0">
         <div class="med-frame"><img src="medecin-servane-lacoste.png" alt="Dr Servane Lacoste, médecin Primary"></div>
         <figcaption class="med-name">Dr Servane LACOSTE</figcaption>
       </figure>
-      <figure class="med-item">
+      <figure class="med-item lvl-1">
         <div class="med-frame"><img src="medecin-pierre-henri-gorioux.png" alt="Dr Pierre-Henri Gorioux, médecin Primary"></div>
         <figcaption class="med-name">Dr Pierre-Henri GORIOUX</figcaption>
       </figure>
-      <figure class="med-item">
+      <figure class="med-item lvl-2">
         <div class="med-frame"><img src="medecin-arnaud-de-milleret.png" alt="Dr Arnaud de Milleret, médecin Primary"></div>
         <figcaption class="med-name">Dr Arnaud DE MILLERET</figcaption>
       </figure>
-      <figure class="med-item">
+      <figure class="med-item lvl-0">
         <div class="med-frame"><img src="medecin-romane-vidcoq.png" alt="Dr Romane Vidcoq, médecin Primary"></div>
         <figcaption class="med-name">Dr Romane VIDCOQ</figcaption>
       </figure>
-      <figure class="med-item">
+      <figure class="med-item lvl-2">
         <div class="med-frame"><img class="zoom-10" src="medecin-adrien-tafforet.png" alt="Dr Adrien Tafforet, médecin Primary"></div>
         <figcaption class="med-name">Dr Adrien TAFFORET</figcaption>
       </figure>
-      <figure class="med-item">
+      <figure class="med-item lvl-1">
         <div class="med-frame"><img class="zoom-10" src="medecin-they-kong.png" alt="Dr They Kong, médecin Primary"></div>
         <figcaption class="med-name">Dr They KONG</figcaption>
       </figure>
