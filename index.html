@@ -962,6 +962,65 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
 .reels-rail::-webkit-scrollbar { display: none; }
 .reels-rail.dragging { cursor: grabbing; user-select: none; scroll-snap-type: none; }
 
+/* Galerie éditoriale « Vos médecins » — série photographique, pas un trombinoscope :
+   cadres identiques (aucune hiérarchie), débordement franc à droite qui suggère que
+   le collectif continue hors champ. Pas de pagination, pas de flèches, pas de dots. */
+.med-rail-wrap { position: relative; }
+
+.med-rail {
+  display: flex;
+  align-items: flex-start;
+  gap: 26px;
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  padding: 0 0 6px;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.med-rail::-webkit-scrollbar { display: none; }
+.med-rail.dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+
+/* Portrait — même gabarit pour tous, pensé pour accueillir un short vidéo
+   vertical demain sans rien redessiner (ratio, radius et hover déjà prêts) */
+.med-item { flex: 0 0 auto; scroll-snap-align: start; }
+
+.med-frame {
+  position: relative;
+  width: clamp(215px, 17.5vw, 270px);
+  aspect-ratio: 3 / 4;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #EFE6D3;
+}
+.med-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 15%;
+  display: block;
+  transform: scale(1.02);
+  transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.med-frame:hover img { transform: scale(1.06); }
+.med-frame img.zoom-10 { transform: scale(1.12); }
+.med-frame:hover img.zoom-10 { transform: scale(1.18); }
+
+/* Nom sous le portrait — hors de la photo, très discret : un repère, pas une fiche */
+.med-name {
+  margin-top: 12px;
+  font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .med-frame { width: 48vw; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .med-frame img { transition: none; }
+}
+
 .reel-card {
   position: relative;
   flex: 0 0 auto;
@@ -2800,50 +2859,34 @@ footer {
     <span class="prog-eyebrow">Vos médecins</span>
   </div>
 
-  <!-- Placeholders en <img> (pas de vidéo réelle encore) : à la réception des .mp4, remplacer chaque <img class="reel-video" src="..."> par <video class="reel-video" muted loop autoplay playsinline src="..."> — le CSS .reel-video (object-fit: cover) s'applique déjà correctement à une vidéo qui joue. -->
-  <!-- Affordance vidéo : durée / son / légende recréés en CSS (pas incrustés dans l'image) pour ne jamais être rognés quel que soit le format de la carte. Images sources recadrées en *-clean.jpg (bandeaux d'origine retirés). -->
-  <div class="reels-rail" id="reelsTrack">
-    <div class="reel-card">
-      <img class="reel-video" src="scene1-clean.jpg" alt="Un médecin Primary : « Ce que j'aime, c'est prendre le temps d'expliquer. »">
-      <span class="reel-duration">0:56</span>
-      <span class="reel-sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg></span>
-      <span class="reel-play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 L10 6 L0 12 Z"/></svg></span>
-      <p class="reel-caption">Ce que j'aime, c'est prendre le temps d'expliquer.</p>
-    </div>
-    <div class="reel-card">
-      <img class="reel-video" src="scene4-clean.jpg" alt="Un médecin Primary marche dans le couloir du cabinet : « Le cabinet, c'est aussi une équipe, et beaucoup d'échanges en coulisses. »">
-      <span class="reel-duration">0:45</span>
-      <span class="reel-sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg></span>
-      <span class="reel-play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 L10 6 L0 12 Z"/></svg></span>
-      <p class="reel-caption">Le cabinet, c'est aussi une équipe, et beaucoup d'échanges en coulisses.</p>
-    </div>
-    <div class="reel-card">
-      <img class="reel-video" src="scene2-clean.jpg" alt="Un médecin Primary : « On voit des choses incroyables au quotidien, et c'est ça qui est génial. »">
-      <span class="reel-duration">0:42</span>
-      <span class="reel-sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg></span>
-      <span class="reel-play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 L10 6 L0 12 Z"/></svg></span>
-      <p class="reel-caption">On voit des choses incroyables au quotidien, et c'est ça qui est génial.</p>
-    </div>
-    <div class="reel-card">
-      <img class="reel-video" src="scene3-clean.jpg" alt="Un médecin Primary en consultation, champ-contrechamp : « Vous me dites ce qui vous inquiète, et on va voir ça ensemble. »" style="object-position:68% 38%">
-      <span class="reel-duration">0:51</span>
-      <span class="reel-sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg></span>
-      <span class="reel-play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 L10 6 L0 12 Z"/></svg></span>
-      <p class="reel-caption">Vous me dites ce qui vous inquiète, et on va voir ça ensemble.</p>
-    </div>
-    <div class="reel-card">
-      <img class="reel-video" src="scene5-clean.jpg" alt="Gros plan sur un médecin Primary : « La médecine générale, c'est la médecine de la vie réelle. »">
-      <span class="reel-duration">0:38</span>
-      <span class="reel-sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg></span>
-      <span class="reel-play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 L10 6 L0 12 Z"/></svg></span>
-      <p class="reel-caption">La médecine générale, c'est la médecine de la vie réelle.</p>
-    </div>
-    <div class="reel-card">
-      <img class="reel-video" src="scene6-clean.jpg" alt="Un médecin Primary : « On réfléchit, on prend du recul, et on décide avec le patient. »">
-      <span class="reel-duration">0:53</span>
-      <span class="reel-sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg></span>
-      <span class="reel-play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 L10 6 L0 12 Z"/></svg></span>
-      <p class="reel-caption">On réfléchit, on prend du recul, et on décide avec le patient.</p>
+  <!-- Galerie éditoriale statique : série de portraits, pas un trombinoscome, pas un choix de médecin.
+       Gabarit pensé pour accueillir des shorts vidéo verticaux demain sans redessiner la section. -->
+  <div class="med-rail-wrap">
+    <div class="med-rail" id="medRail">
+      <figure class="med-item">
+        <div class="med-frame"><img src="medecin-servane-lacoste.png" alt="Dr Servane Lacoste, médecin Primary"></div>
+        <figcaption class="med-name">Dr Servane LACOSTE</figcaption>
+      </figure>
+      <figure class="med-item">
+        <div class="med-frame"><img src="medecin-pierre-henri-gorioux.png" alt="Dr Pierre-Henri Gorioux, médecin Primary"></div>
+        <figcaption class="med-name">Dr Pierre-Henri GORIOUX</figcaption>
+      </figure>
+      <figure class="med-item">
+        <div class="med-frame"><img src="medecin-arnaud-de-milleret.png" alt="Dr Arnaud de Milleret, médecin Primary"></div>
+        <figcaption class="med-name">Dr Arnaud DE MILLERET</figcaption>
+      </figure>
+      <figure class="med-item">
+        <div class="med-frame"><img src="medecin-romane-vidcoq.png" alt="Dr Romane Vidcoq, médecin Primary"></div>
+        <figcaption class="med-name">Dr Romane VIDCOQ</figcaption>
+      </figure>
+      <figure class="med-item">
+        <div class="med-frame"><img class="zoom-10" src="medecin-adrien-tafforet.png" alt="Dr Adrien Tafforet, médecin Primary"></div>
+        <figcaption class="med-name">Dr Adrien TAFFORET</figcaption>
+      </figure>
+      <figure class="med-item">
+        <div class="med-frame"><img class="zoom-10" src="medecin-they-kong.png" alt="Dr They Kong, médecin Primary"></div>
+        <figcaption class="med-name">Dr They KONG</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -3027,9 +3070,9 @@ function scrollCards(dir) {
   activateCard(next);
 }
 
-// Drag to scroll — rail des reels médecins
+// Drag to scroll — rail des portraits médecins
 (function() {
-  const track = document.getElementById('reelsTrack');
+  const track = document.getElementById('medRail');
   if (!track) return;
   let isDown = false, startX, scrollLeft;
   track.addEventListener('mousedown', e => { isDown = true; track.classList.add('dragging'); startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
