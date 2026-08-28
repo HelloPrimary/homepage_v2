@@ -105,6 +105,8 @@ body { font-family: var(--f); background: #fff; color: var(--ink); }
   transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
 }
 .med-frame:hover img { transform: scale(1.06); }
+.med-frame img.zoom-10 { transform: scale(1.12); }
+.med-frame:hover img.zoom-10 { transform: scale(1.18); }
 
 /* Prénom seul, discret — pas de "Médecin généraliste" répété 8 fois, pas de cartouche */
 .med-first-name {
@@ -135,12 +137,12 @@ body { font-family: var(--f); background: #fff; color: var(--ink); }
   <!-- 6 vrais portraits médecins Primary -->
   <div class="med-rail-wrap">
     <div class="med-rail" id="medRail">
-      <div class="med-frame"><img src="medecin-servane-lacoste.png" alt="Dr Servane Lacoste, médecin Primary"><span class="med-first-name">Servane</span></div>
-      <div class="med-frame"><img src="medecin-pierre-henri-gorioux.png" alt="Dr Pierre-Henri Gorioux, médecin Primary"><span class="med-first-name">Pierre-Henri</span></div>
-      <div class="med-frame"><img src="medecin-arnaud-de-milleret.png" alt="Dr Arnaud de Milleret, médecin Primary"><span class="med-first-name">Arnaud</span></div>
-      <div class="med-frame"><img src="medecin-romane-vidcoq.png" alt="Dr Romane Vidcoq, médecin Primary"><span class="med-first-name">Romane</span></div>
-      <div class="med-frame"><img src="medecin-adrien-tafforet.png" alt="Dr Adrien Tafforet, médecin Primary"><span class="med-first-name">Adrien</span></div>
-      <div class="med-frame"><img src="medecin-they-kong.png" alt="Dr They Kong, médecin Primary"><span class="med-first-name">They</span></div>
+      <div class="med-frame"><img src="medecin-servane-lacoste.png" alt="Dr Servane Lacoste, médecin Primary"><span class="med-first-name">Dr Servane LACOSTE</span></div>
+      <div class="med-frame"><img src="medecin-pierre-henri-gorioux.png" alt="Dr Pierre-Henri Gorioux, médecin Primary"><span class="med-first-name">Dr Pierre-Henri GORIOUX</span></div>
+      <div class="med-frame"><img src="medecin-arnaud-de-milleret.png" alt="Dr Arnaud de Milleret, médecin Primary"><span class="med-first-name">Dr Arnaud DE MILLERET</span></div>
+      <div class="med-frame"><img src="medecin-romane-vidcoq.png" alt="Dr Romane Vidcoq, médecin Primary"><span class="med-first-name">Dr Romane VIDCOQ</span></div>
+      <div class="med-frame"><img class="zoom-10" src="medecin-adrien-tafforet.png" alt="Dr Adrien Tafforet, médecin Primary"><span class="med-first-name">Dr Adrien TAFFORET</span></div>
+      <div class="med-frame"><img class="zoom-10" src="medecin-they-kong.png" alt="Dr They Kong, médecin Primary"><span class="med-first-name">Dr They KONG</span></div>
     </div>
   </div>
 </section>
