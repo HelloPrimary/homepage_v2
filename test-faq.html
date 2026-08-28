@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test — Section FAQ</title>
+<style>
+@font-face {
+  font-family: 'Brockmann';
+  src: url('fonts/Brockmann-Regular.otf') format('opentype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Brockmann';
+  src: url('fonts/Brockmann-SemiBold.otf') format('opentype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Brockmann';
+  src: url('fonts/Brockmann-SemiBold.otf') format('opentype');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { -webkit-font-smoothing: antialiased; }
+
+:root {
+  --bordeaux: #3a1c33;
+  --ink: #101010;
+  --muted: #5e6266;
+  --f: 'Brockmann', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+}
+
+body { font-family: var(--f); background: #fff; color: var(--ink); }
+
+.maquette-tag {
+  background: var(--bordeaux); color: rgba(255,255,255,0.8);
+  text-align: center; font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 12px 1rem;
+}
+
+/* ── Section FAQ — dernière étape de réassurance avant le CTA ───────── */
+.faq-section {
+  background: #FAF8F5;
+  padding: 150px 6% 170px;
+}
+
+.faq-grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 96px;
+  align-items: start;
+}
+
+.faq-intro { position: sticky; top: 120px; }
+
+.faq-eyebrow {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+.faq-headline {
+  font-family: var(--f);
+  font-size: clamp(1.7rem, 2.6vw, 2.35rem);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.28;
+  letter-spacing: -0.015em;
+  max-width: 15ch;
+}
+
+/* Accordéon dépouillé : pas de card, pas d'ombre — la typographie et l'espace
+   font toute la hiérarchie. Une seule question ouverte à la fois. */
+.faq-list { border-top: 1px solid rgba(16,16,16,0.1); }
+
+.faq-item { border-bottom: 1px solid rgba(16,16,16,0.1); }
+
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 26px 0;
+  font-family: var(--f);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.faq-q-mark {
+  position: relative;
+  flex-shrink: 0;
+  width: 15px; height: 15px;
+}
+.faq-q-mark::before, .faq-q-mark::after {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  background: var(--ink);
+  transition: transform 0.35s cubic-bezier(0.65,0,0.35,1), opacity 0.35s ease;
+}
+.faq-q-mark::before { width: 15px; height: 1.4px; transform: translate(-50%, -50%); }
+.faq-q-mark::after  { width: 1.4px; height: 15px; transform: translate(-50%, -50%); }
+.faq-item.open .faq-q-mark::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+.faq-item.open .faq-q-mark::before { transform: translate(-50%, -50%) rotate(180deg); }
+
+.faq-a-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.65,0,0.35,1);
+}
+.faq-item.open .faq-a-wrap { grid-template-rows: 1fr; }
+
+.faq-a-inner { overflow: hidden; }
+
+.faq-a {
+  padding: 0 0 28px;
+  max-width: 58ch;
+}
+.faq-a p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--muted);
+}
+.faq-a p + p { margin-top: 14px; }
+.faq-a a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+
+@media (max-width: 860px) {
+  .faq-section { padding: 90px 1.5rem 100px; }
+  .faq-grid { grid-template-columns: 1fr; gap: 44px; }
+  .faq-intro { position: static; }
+  .faq-headline { max-width: none; }
+  .faq-q { font-size: 0.98rem; padding: 22px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-a-wrap, .faq-q-mark::before, .faq-q-mark::after { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="maquette-tag">Test — Section FAQ · Maquette séparée, n'affecte pas la homepage</div>
+
+<section class="faq-section">
+  <div class="faq-grid">
+
+    <div class="faq-intro">
+      <span class="faq-eyebrow">Vos questions</span>
+      <h2 class="faq-headline">Tout ce qu'il faut savoir avant de commencer.</h2>
+    </div>
+
+    <div class="faq-list" id="faqList">
+
+      <div class="faq-item open">
+        <button class="faq-q" type="button">
+          <span>Comment commencer mon suivi chez Primary ?</span>
+          <span class="faq-q-mark"></span>
+        </button>
+        <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+          <p>Prenez d'abord rendez-vous dans l'un de nos cabinets. Une fois patient·e, vous accédez à l'application Primary et pouvez réaliser votre premier bilan de prévention avec votre médecin.</p>
+          <p>Votre suivi se poursuit ensuite tout au long de l'année, au cabinet et via l'application.</p>
+        </div></div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span>Puis-je choisir mon médecin Primary comme médecin traitant ?</span>
+          <span class="faq-q-mark"></span>
+        </button>
+        <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+          <p>Oui. Les médecins généralistes exerçant dans les cabinets Primary peuvent être déclarés comme médecin traitant, comme n'importe quel médecin généraliste.</p>
+          <p>La déclaration se fait directement avec votre médecin.</p>
+        </div></div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span>Quel est le tarif d'une consultation ?</span>
+          <span class="faq-q-mark"></span>
+        </button>
+        <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+          <p>Tous les médecins exerçant dans les cabinets Primary sont conventionnés en secteur 1 et ne pratiquent pas de dépassement d'honoraires.</p>
+          <p>Le tarif de base d'une consultation de médecine générale est de 30 €. Il peut varier lorsque des actes complémentaires sont réalisés, dans le respect des tarifs de l'Assurance Maladie.</p>
+          <p>Les consultations sont remboursées par l'Assurance Maladie et votre complémentaire santé selon les conditions habituelles.</p>
+        </div></div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span>Combien coûte le bilan annuel de prévention ?</span>
+          <span class="faq-q-mark"></span>
+        </button>
+        <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+          <p>Le bilan annuel de prévention est facturé au même tarif qu'une consultation classique, soit 30 €, sans dépassement d'honoraires.</p>
+        </div></div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span>Comment poser une question à mon médecin entre deux consultations ?</span>
+          <span class="faq-q-mark"></span>
+        </button>
+        <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+          <p>Depuis l'application Primary, vous pouvez poser vos questions de santé directement à AMIA, notre assistant médical.</p>
+          <p>AMIA vous répond et, lorsque c'est nécessaire, transmet votre échange à votre médecin, qui peut prendre le relais.</p>
+        </div></div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span>La CSS et l'AME sont-elles acceptées dans les cabinets Primary ?</span>
+          <span class="faq-q-mark"></span>
+        </button>
+        <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+          <p>Oui. Tous les cabinets Primary acceptent la Complémentaire santé solidaire (CSS) et l'Aide médicale de l'État (AME).</p>
+        </div></div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span>Comment mes données de santé sont-elles protégées ?</span>
+          <span class="faq-q-mark"></span>
+        </button>
+        <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+          <p>Vos données de santé sont hébergées en France sur une infrastructure certifiée Hébergeur de Données de Santé (HDS).</p>
+          <p>Leur accès est limité aux professionnels autorisés de votre équipe médicale et vous gardez le contrôle de vos données et de vos droits.</p>
+          <p>Vous pouvez retrouver le détail dans notre <a href="#">politique de confidentialité</a>.</p>
+        </div></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const list = document.getElementById('faqList');
+  const items = Array.from(list.querySelectorAll('.faq-item'));
+  items.forEach((item) => {
+    const btn = item.querySelector('.faq-q');
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      items.forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
