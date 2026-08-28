@@ -923,7 +923,7 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
 /* ── BLOC 5 — PORTRAITS MÉDECINS (vidéo, éditorial) ── */
 .bloc-medecins {
   background: #F7F6F3;
-  padding: 140px 0 140px 6%;
+  padding: 190px 0 190px 6%;
   border-radius: 48px 48px 0 0;
   margin-top: -48px;
   position: relative;
@@ -932,7 +932,7 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
 
 .medecins-head {
   max-width: none;
-  margin: 0 auto 56px;
+  margin: 0 auto 72px;
   padding: 0 6%;
   text-align: center;
 }
@@ -978,12 +978,12 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
 .med-rail {
   display: flex;
   align-items: flex-start;
-  gap: 26px;
+  gap: 32px;
   overflow-x: auto;
   overflow-y: visible;
   scroll-behavior: smooth;
   scroll-snap-type: x proximity;
-  padding: 4px 0 6px;
+  padding: 6px 0 6px;
   scrollbar-width: none;
   cursor: grab;
 }
@@ -993,14 +993,15 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
 /* Portrait — même gabarit pour tous, pensé pour accueillir un short vidéo
    vertical demain sans rien redessiner (ratio, radius et hover déjà prêts).
    Seule la position verticale varie, sur 3 paliers très légers — jamais la taille :
-   ça donne du rythme à la série sans jamais suggérer de hiérarchie entre médecins. */
+   ça donne du rythme à la série sans jamais suggérer de hiérarchie entre médecins.
+   Gabarit large (~3,5-4 visibles sur desktop) pour que les visages dominent la scène. */
 .med-item { flex: 0 0 auto; scroll-snap-align: start; }
-.med-item.lvl-1 { margin-top: 18px; }
-.med-item.lvl-2 { margin-top: 32px; }
+.med-item.lvl-1 { margin-top: 24px; }
+.med-item.lvl-2 { margin-top: 42px; }
 
 .med-frame {
   position: relative;
-  width: clamp(215px, 17.5vw, 270px);
+  width: clamp(280px, 23vw, 350px);
   aspect-ratio: 3 / 4;
   border-radius: 14px;
   overflow: hidden;
@@ -1026,7 +1027,7 @@ nav.nav-scrolled .btn-secondary { color: var(--text); }
 }
 
 @media (max-width: 640px) {
-  .med-frame { width: 48vw; }
+  .med-frame { width: 62vw; }
 }
 
 @media (prefers-reduced-motion: reduce) {
