@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Construire la médecine proactive — Primary</title>
+<meta name="description" content="Après trois ans de construction, Thibault Lanthier, CEO et cofondateur de Primary, expose le modèle de soins primaires que nous cherchons à bâtir : une médecine proactive, une nouvelle combinaison entre médecin et IA, et des cabinets ancrés dans le monde réel.">
+<!-- Aperçu de travail : ne doit pas être indexé, la vraie page est sur le site Primary. -->
+<meta name="robots" content="noindex, nofollow">
+<style>
+:root { --ink: #101010; --ink-body: rgba(16,16,16,.88); --ink-muted: #5e6266;
+        --rule: rgba(58,28,51,.14); --gold: #efc712; }
+
+@font-face { font-family: Brockmann-Regular;  src: url('fonts/Brockmann-Regular.otf')  format('opentype'); font-display: swap; }
+@font-face { font-family: Brockmann-Medium;   src: url('fonts/Brockmann-Medium.otf')   format('opentype'); font-display: swap; }
+@font-face { font-family: Brockmann-Semibold; src: url('fonts/Brockmann-SemiBold.otf') format('opentype'); font-display: swap; }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body { background: #fff; color: var(--ink); font-family: Brockmann-Regular, sans-serif;
+       -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; }
+
+/* Header : réduit au strict nécessaire — sur une page éditoriale il accompagne
+   la lecture au lieu de la concurrencer. */
+.nav { position: fixed; inset: 0 0 auto; height: 85px; display: flex; align-items: center;
+       padding: 0 48px; background: #fff; z-index: 10; transition: box-shadow .3s ease; }
+.nav.is-scrolled { box-shadow: 0 1px 0 rgba(58,28,51,.1); }
+.nav-logo { display: block; }
+.nav-logo svg { height: 26px; width: auto; display: block; }
+@media (max-width: 700px) { .nav { height: 72px; padding: 0 24px; } .nav-logo svg { height: 22px; } }
+
+.manifeste { padding-top: 128px; }
+.hero, .body { width: calc(100% - 96px); max-width: 43.75rem; margin: 0 auto; }
+@media (max-width: 700px) { .manifeste { padding-top: 96px; } .hero, .body { width: calc(100% - 48px); } }
+
+@keyframes settle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.hero { padding-bottom: 78px; }
+.hero .title, .hero .byline { animation: settle .6s cubic-bezier(.165,.84,.44,1) both; }
+.hero .byline { animation-delay: .08s; }
+@media (prefers-reduced-motion: reduce) { .hero .title, .hero .byline { animation: none; } }
+@media (max-width: 700px) { .hero { padding-bottom: 54px; } }
+
+.title { font-family: Brockmann-Semibold, sans-serif; font-size: clamp(2.375rem, 5.6vw, 4.125rem);
+         line-height: 1.04; letter-spacing: -.032em; text-wrap: balance; margin-bottom: 2.25rem; }
+@media (max-width: 700px) { .title { line-height: 1.08; letter-spacing: -.028em; margin-bottom: 1.75rem; } }
+
+.byline { display: flex; flex-direction: column; gap: .2rem; }
+.author { font-family: Brockmann-Semibold, sans-serif; font-size: 1.0625rem; line-height: 1.4; letter-spacing: -.005em; }
+.role, .date { font-size: 1.0625rem; line-height: 1.4; color: var(--ink-muted); }
+.date { margin-top: .45rem; }
+
+.chapter + .chapter { margin-top: 5.25rem; }
+@media (max-width: 700px) { .chapter + .chapter { margin-top: 3.5rem; } }
+
+.chapter_title { font-family: Brockmann-Semibold, sans-serif;
+                 font-size: clamp(1.75rem, 1.35rem + 1.35vw, 2.125rem); line-height: 1.2;
+                 letter-spacing: -.024em; text-wrap: pretty; margin-bottom: 1.6rem; }
+@media (max-width: 700px) { .chapter_title { margin-bottom: 1.2rem; } }
+
+.p { font-size: clamp(1.125rem, .98rem + .42vw, 1.3125rem); line-height: 1.52;
+     letter-spacing: -.003em; color: var(--ink-body); text-wrap: pretty; }
+.p + .p { margin-top: 1.05em; }
+
+.subhead { font-family: Brockmann-Semibold, sans-serif; font-size: clamp(1.375rem, 1.1rem + .6vw, 1.625rem);
+           line-height: 1.4; letter-spacing: -.013em; text-wrap: pretty; margin: 2.6rem 0 1.05rem; }
+@media (max-width: 700px) { .subhead { margin: 2rem 0 .85rem; } }
+
+.convictions { margin: 1.05em 0; }
+.conviction + .conviction { margin-top: 1.45rem; }
+.conviction_num { font-family: Brockmann-Medium, sans-serif; font-size: .8125rem; line-height: 1.4;
+                  letter-spacing: .08em; font-variant-numeric: tabular-nums; color: var(--gold); margin-bottom: .2rem; }
+.conviction_text { font-size: clamp(1.125rem, .98rem + .42vw, 1.3125rem); line-height: 1.52;
+                   letter-spacing: -.003em; color: var(--ink-body); text-wrap: pretty; }
+.conviction_lead { font-family: Brockmann-Medium, sans-serif; color: var(--ink); }
+
+.proof { font-family: Brockmann-Medium, sans-serif; font-size: clamp(1.125rem, .98rem + .42vw, 1.3125rem);
+         line-height: 1.52; letter-spacing: -.006em; text-wrap: pretty; margin: 1.9rem 0; }
+.proof_figure { font-family: Brockmann-Semibold, sans-serif; font-size: 1.34em; line-height: 1;
+                letter-spacing: -.02em; white-space: nowrap; }
+
+.usecases { margin: 1.6rem 0; }
+.usecases_list { list-style: none; }
+.usecase { position: relative; font-size: clamp(1.0625rem, .98rem + .3vw, 1.25rem); line-height: 1.45;
+           letter-spacing: -.002em; color: var(--ink-body); text-wrap: pretty; padding-left: 1.4rem; }
+.usecase + .usecase { margin-top: .5rem; }
+.usecase_mark { position: absolute; left: 0; color: var(--ink-muted); }
+@media (max-width: 700px) { .usecase { padding-left: 1.1rem; } }
+.usecases_conclusion { font-family: Brockmann-Medium, sans-serif;
+                       font-size: clamp(1.125rem, .98rem + .42vw, 1.3125rem); line-height: 1.52;
+                       letter-spacing: -.006em; text-wrap: pretty; margin-top: 1.35rem; }
+
+.statement { font-family: Brockmann-Semibold, sans-serif; font-size: clamp(1.4375rem, 1.15rem + 1.2vw, 1.875rem);
+             line-height: 1.32; letter-spacing: -.02em; text-wrap: pretty; margin: 3.5rem 0 .75rem; }
+@media (max-width: 700px) {
+  .statement { font-size: clamp(1.3125rem, 1rem + 2.8vw, 1.625rem); line-height: 1.36; margin: 2.5rem 0 .5rem; }
+  .statement_break { display: none; }
+}
+
+.steps { list-style: none; margin-top: 2.25rem; }
+.step + .step { margin-top: 2rem; }
+@media (max-width: 700px) { .steps { margin-top: 1.75rem; } .step + .step { margin-top: 1.6rem; } }
+.step_num { font-family: Brockmann-Medium, sans-serif; font-size: .8125rem; line-height: 1.4;
+            letter-spacing: .08em; font-variant-numeric: tabular-nums; color: var(--ink-muted); margin-bottom: .35rem; }
+.step_title { font-family: Brockmann-Semibold, sans-serif; font-size: clamp(1.375rem, 1.1rem + .6vw, 1.625rem);
+              line-height: 1.3; letter-spacing: -.016em; text-wrap: balance; margin-bottom: .3rem; }
+.step_text { font-size: clamp(1.0625rem, .95rem + .38vw, 1.25rem); line-height: 1.52;
+             color: var(--ink-body); text-wrap: pretty; }
+
+.closing { font-family: Brockmann-Semibold, sans-serif; font-size: clamp(1.4375rem, 1.15rem + 1.2vw, 1.875rem);
+           line-height: 1.3; letter-spacing: -.021em; text-wrap: balance; margin-top: 2.75rem; }
+@media (max-width: 700px) { .closing { font-size: clamp(1.25rem, 1rem + 2.6vw, 1.5rem); margin-top: 2rem; } }
+
+.figure { margin: .6rem 0 2.75rem; }
+.figure_img { display: block; width: 100%; height: auto; border-radius: 10px; }
+@media (max-width: 700px) { .figure { margin: .4rem 0 2rem; } }
+
+.signature { margin-top: 4.5rem; padding-bottom: 140px; }
+.signature_placeholder { width: 190px; height: 68px; margin-bottom: .6rem; border-bottom: 1px solid var(--rule); }
+.signature_name { font-family: Brockmann-Semibold, sans-serif; font-size: 1.0625rem; line-height: 1.4; letter-spacing: -.005em; }
+@media (max-width: 700px) {
+  .signature { margin-top: 3.25rem; padding-bottom: 96px; }
+  .signature_placeholder { width: 160px; height: 56px; }
+}
+</style>
+</head>
+<body>
+<nav class="nav"><a class="nav-logo" href="index.html"><svg viewBox="0 0 256 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M180.716 41.7054C174.693 41.7054 170.177 38.4627 170.177 32.7438C170.177 27.1428 174.074 23.4284 180.983 23.0157L189.407 22.8125C189.407 20.6311 187.115 17.9741 182.864 17.9741C178.494 17.9741 176.613 20.4212 175.964 22.3079L170.059 19.301C171.889 14.9381 175.964 11.0469 183.05 11.0469C192.38 11.0469 196.808 17.1199 196.808 22.8388V41.7054H189.427V38.4627C187.951 40.7621 184.732 41.7054 180.716 41.7054ZM177.676 32.449C177.676 34.5125 179.389 35.8096 181.81 35.8096C185.766 35.8096 189.545 33.2155 189.545 29.4421L189.552 28.9815L181.455 29.0294C178.983 29.0331 177.676 30.3855 177.676 32.449Z" fill="#3A1C33"/>
+      <path d="M119.629 41.6884V11.6103H127.01V14.8035C128.368 12.3272 131.374 11.0352 135.154 11.0352C139.169 11.0352 142.363 12.2093 144.253 14.9214C145.906 12.7989 148.892 11.0352 153.793 11.0352C160.702 11.0352 165.747 15.5699 165.747 21.5247V41.6884H158.366V23.8241C158.366 19.9918 155.82 17.9739 152.395 17.9739C148.675 17.9739 146.379 20.2276 146.379 23.8241V41.6884H138.997V23.8241C138.997 19.9918 136.451 17.9579 133.026 17.9579C129.306 17.9579 127.01 20.2276 127.01 23.8241V41.6884H119.629Z" fill="#3A1C33"/>
+      <path d="M107.816 41.7054V11.6152H115.198V41.7054H107.816Z" fill="#3A1C33"/>
+      <path d="M83.7617 11.6092V41.7057H91.0047V24.176C91.0047 20.6469 93.2645 17.9856 96.915 17.9856C98.7514 17.8748 100.513 18.7259 101.566 20.2324L101.789 20.5513L105.241 12.8127L104.919 12.6485C103.22 11.7839 100.954 11.0469 98.9963 11.0469C95.2879 11.0469 92.3374 12.8945 91.0047 15.3243V11.6092H83.7617Z" fill="#3A1C33"/>
+      <path d="M48.6367 54.0004V11.61H55.7222V15.0624C57.4794 12.7419 61.1015 11.0431 65.1261 11.0431C73.0052 11.0431 79.6996 16.7603 79.6996 26.325C79.6996 35.3803 73.0618 41.7061 65.1261 41.7061C61.1015 41.7061 57.4228 39.8514 55.7222 37.531V54.0004H48.6367ZM55.9815 26.325C55.9815 31.079 59.0099 34.5555 64.0548 34.5555C69.1564 34.5555 72.1281 31.079 72.1281 26.325C72.1281 21.5143 69.1564 18.0379 64.0548 18.0379C59.0099 18.0379 55.9815 21.5143 55.9815 26.325Z" fill="#3A1C33"/>
+      <path d="M201.242 11.6092V41.7057H208.485V24.176C208.485 20.6469 210.745 17.9856 214.395 17.9856C216.232 17.8748 217.994 18.7259 219.047 20.2324L219.269 20.5513L222.722 12.8127L222.399 12.6485C220.701 11.7839 218.434 11.0469 216.477 11.0469C212.768 11.0469 209.818 12.8945 208.485 15.3243V11.6092H201.242Z" fill="#3A1C33"/>
+      <path d="M240.639 29.8934L233.254 11.6094L225.293 11.6094L236.657 39.6941L235.805 41.8412L230.887 53.995L238.845 53.9951L255.999 11.6094L248.038 11.6095L240.639 29.8934Z" fill="#3A1C33"/>
+      <path d="M111.506 9.02673C109.014 9.02673 106.985 7.00603 106.985 4.51337C106.985 2.0207 109.014 -3.06099e-07 111.506 -1.9731e-07C113.999 -8.85221e-08 116.027 2.0207 116.027 4.51337C116.027 7.00603 113.999 9.02673 111.506 9.02673Z" fill="#3A1C33"/>
+      <path d="M13.968 43.0024L20.8118 45.7632L25.9302 33.1149L25.9326 33.1169L33.52 14.3593L26.6762 11.5985L22.8925 20.9487L9.27739 9.54102L4.53281 15.1866L15.2297 24.1492L15.2318 24.1478L19.9858 28.1319L13.968 43.0024Z" fill="#3A1C33"/>
+      <path d="M15.2508 33.0862L16.9594 28.8984L13.4261 25.9323L0 30.1883L2.23404 37.2125L15.2508 33.0862Z" fill="#3A1C33"/>
+      <path d="M36.8234 32.6211L30.8761 27.638L27.97 34.824L32.0788 38.2666L36.8234 32.6211Z" fill="#3A1C33"/>
+    </svg></a></nav>
+<main>
+<article class="manifeste">
+<header class="hero">
+<h1 class="title">Construire la médecine proactive</h1>
+<div class="byline">
+<p class="author">Thibault Lanthier</p>
+<p class="role">CEO &amp; cofondateur de Primary</p>
+<p class="date"><time datetime="2026-09-08">Septembre 2026</time></p>
+</div>
+</header>
+<div class="body"><section class="chapter" id="introduction"><p class="p">Il y a trois ans, je publiais le manifeste de ce qui allait devenir Primary. Nous voulions construire un nouveau modèle de cabinet médical, en mettant la technologie au service des médecins et des patients.</p><p class="p">Depuis trois ans, nous avons construit en silence pour faire de cette vision une réalité. Nous avons ouvert une dizaine de cabinets. Des dizaines de médecins nous ont rejoints. Plus de 100 000 patients ont consulté et sont suivis dans nos cabinets. Nous avons constitué autour des médecins de véritables équipes de soins, développé nos propres outils et intégré l’IA directement dans le parcours patient.</p><p class="p">Mais ce n’est que le début.</p><p class="p">Notre ambition n’a jamais été de construire des « jolis » cabinets médicaux (même si on est fier du design de nos cabinets). Notre ambition est de construire un nouveau modèle de soins primaires. Un modèle qui repose sur :</p><div class="convictions"><div class="conviction"><p class="conviction_num">01</p><p class="conviction_text"><span class="conviction_lead">Une médecine proactive,</span> dont l’objectif n’est plus seulement de soigner la maladie, mais de permettre à chacun de vivre plus longtemps en bonne santé.</p></div><div class="conviction"><p class="conviction_num">02</p><p class="conviction_text"><span class="conviction_lead">Une nouvelle combinaison entre Médecin + IA,</span> dans laquelle l’IA prend en charge une partie croissante de l’information, de l’accompagnement et du suivi, sous supervision du médecin qui intervient là où son expertise, son jugement et la relation humaine ont le plus de valeur.</p></div><div class="conviction"><p class="conviction_num">03</p><p class="conviction_text"><span class="conviction_lead">Une médecine humaine et ancrée dans le monde réel,</span> autour du médecin traitant et d’une équipe qui connaît ses patients dans la durée.</p></div></div><p class="p">Nous avons construit les fondations de ce modèle. Désormais nous pouvons passer à la prochaine étape.</p></section><section class="chapter" id="de-soigner-la-maladie-a-maintenir-les-gens-en-bonne-sante"><h2 class="chapter_title">De soigner la maladie<br> à maintenir les gens en bonne santé</h2><p class="p">La médecine primaire (médecine générale) reste encore aujourd’hui principalement centrée sur le traitement des maladies. Quelque chose ne va pas. Le patient prend rendez-vous. Il voit son médecin. Le médecin diagnostique et traite. Puis, le plus souvent, chacun reprend sa vie jusqu’au prochain problème. Ce modèle a permis des progrès extraordinaires. Mais il repose sur une logique essentiellement réactive : nous intervenons lorsqu’un problème est déjà là.</p><p class="p">La prochaine grande transformation de la médecine sera de passer progressivement d’un système qui soigne principalement la maladie à un système dont l’objectif est de maintenir les gens en bonne santé le plus longtemps possible. Cela change profondément le point de départ de la médecine.</p><p class="p">Ne plus attendre qu’une maladie apparaisse pour agir, mais identifier les risques suffisamment tôt pour pouvoir les réduire. Ne plus s’intéresser uniquement aux symptômes et aux traitements, mais à ce qui détermine notre santé dans la durée : activité physique, sommeil, nutrition, santé mentale, comportements. Ne plus s’adresser uniquement aux personnes malades, mais accompagner les patients pour les aider à mieux prendre soin de leur capital santé.</p><p class="p">Une médecine qui ne demande plus seulement « Qu’est-ce qui ne va pas aujourd’hui ? », mais aussi « Que pouvons-nous faire aujourd’hui pour que vous soyez toujours en bonne santé dans dix ou vingt ans ? »</p></section><section class="chapter" id="l-ia-ouvre-la-possibilite-d-un-nouveau-modele-de-soins"><h2 class="chapter_title">L’IA ouvre la possibilité<br> d’un nouveau modèle de soins</h2><p class="p">Une médecine proactive requiert de pouvoir suivre un patient en continu sur la durée. Il faut pouvoir recueillir des informations, suivre des indicateurs, rappeler, expliquer, relancer, détecter qu’une situation nécessite une intervention. À l’échelle de milliers de patients, cela était jusqu’ici pratiquement impossible à mettre en œuvre pour un médecin.</p><h3 class="subhead">L’IA change radicalement cette contrainte.</h3><p class="p">L’IA est bien plus qu’un outil de productivité pour les médecins. Elle les complète. Et va leur permettre de faire à l’échelle ce qu’ils ont rarement le temps de faire en dehors des consultations : expliquer, écouter, accompagner, rappeler, suivre.</p><p class="p">Les patients utilisent déjà l’IA tous les jours pour comprendre un résultat, poser une question sur un symptôme, préparer une consultation ou chercher une première orientation. Mais aujourd’hui, ces usages se développent principalement en dehors du parcours de soins et sans lien avec le médecin qui connaît le patient.</p><p class="p">Or si l’IA peut remplacer certaines interactions qui nécessitaient auparavant du temps médical, elle ne supprime pas le besoin d’un médecin responsable de la prise en charge. L’enjeu est d’intégrer l’IA dans le parcours de soin. Construire une boucle médecin-patient-IA.</p><h3 class="subhead">Une nouvelle combinaison : Médecin + IA</h3><p class="p">Chez Primary, nous avons commencé par un cas d’usage très concret : la préconsultation. Avant son rendez-vous, notre assistant IA échange avec le patient pour comprendre le motif de sa venue, recueillir les informations pertinentes et préparer la consultation.</p><p class="proof">Aujourd’hui, <span class="proof_figure">80 %</span> des patients de nos cabinets préparent ainsi leur échange avant leur consultation.</p><p class="p">Le médecin retrouve son patient avec une partie du travail de recueil déjà réalisée et peut concentrer davantage son temps sur ce qui nécessite réellement son expertise : comprendre, examiner, décider, expliquer.</p><p class="p">Mais ce n’est qu’une première étape.</p><p class="p">L’IA peut apporter disponibilité, connaissance, personnalisation au quotidien entre les consultations.</p><div class="usecases"><ul class="usecases_list" role="list"><li class="usecase"><span class="usecase_mark" aria-hidden="true">&ndash;</span>Expliquer un résultat d’analyse.</li><li class="usecase"><span class="usecase_mark" aria-hidden="true">&ndash;</span>Répondre à une question qui ne justifierait pas nécessairement un rendez-vous.</li><li class="usecase"><span class="usecase_mark" aria-hidden="true">&ndash;</span>Demander quelques jours plus tard si des symptômes se sont améliorés.</li><li class="usecase"><span class="usecase_mark" aria-hidden="true">&ndash;</span>Vérifier qu’un examen a été réalisé.</li><li class="usecase"><span class="usecase_mark" aria-hidden="true">&ndash;</span>Accompagner un objectif d’activité physique, de sommeil ou de perte de poids.</li><li class="usecase"><span class="usecase_mark" aria-hidden="true">&ndash;</span>Rappeler un dépistage.</li></ul><p class="usecases_conclusion">Et surtout, identifier les situations dans lesquelles l’intervention de son médecin est nécessaire.</p></div><p class="p">Cela change le rôle du médecin. Il n’a plus vocation à être le seul point d’accès à la connaissance médicale. Sa valeur se concentre alors encore davantage sur ce qui fait le cœur de son métier : connaître son patient, comprendre son contexte, examiner, arbitrer dans l’incertitude, décider, rassurer et construire avec lui une stratégie de santé dans la durée.</p><p class="statement">Le médecin décide et supervise.<br class="statement_break"> L’IA accompagne et exécute ce qui peut l’être.</p></section><section class="chapter" id="faire-entrer-cette-nouvelle-medecine-dans-le-monde-reel"><h2 class="chapter_title">Faire entrer cette nouvelle médecine<br> dans le monde réel</h2><figure class="figure"><img class="figure_img" src="images/cabinet-entree.jpg" alt="Deux hommes se saluent devant l’entrée vitrée d’un cabinet Primary, l’un tenant un vélo, le logo Primary visible sur la vitre." width="1535" height="1025" loading="lazy" decoding="async"></figure><p class="p">Une autre conviction nous distingue : le digital seul ne suffira pas. La médecine restera aussi physique. Nous aurons toujours besoin d’être examinés, diagnostiqués, rassurés, accompagnés. Nous aurons besoin d’un médecin qui nous connaît et qui assume la responsabilité de notre prise en charge. L’enjeu est donc moins de faire disparaître le cabinet médical que de le faire entrer dans cette nouvelle ère.</p><p class="p">C’est précisément pour cela que nous avons commencé Primary par les cabinets. Cela nous permet de ne pas simplement imaginer cette nouvelle médecine, mais de la construire et de la tester chaque jour dans le monde réel, avec des médecins et des patients.</p><p class="p">Nos cabinets ne sont pas simplement des lieux dans lesquels nous réalisons des consultations. Nos cabinets sont l’infrastructure qui permet de construire ce nouveau modèle de soins.</p></section><section class="chapter" id="le-prochain-chapitre-de-primary"><h2 class="chapter_title">Le prochain chapitre de Primary</h2><p class="p">Notre ambition depuis le premier jour est de transformer les soins primaires. Nous avons passé trois ans à construire l’infrastructure nécessaire pour rendre cette nouvelle médecine possible. Notre plan pour les prochaines années est finalement assez simple :</p><ol class="steps"><li class="step"><p class="step_num">01</p><p class="step_title">Build the clinics</p><p class="step_text">Construire l’infrastructure physique et humaine d’une nouvelle médecine primaire.</p></li><li class="step"><p class="step_num">02</p><p class="step_title">Build the AI care team</p><p class="step_text">Combiner médecins, équipes de soins et IA pour offrir à chaque patient davantage de disponibilité, de connaissance et d’accompagnement.</p></li><li class="step"><p class="step_num">03</p><p class="step_title">Build continuous care</p><p class="step_text">Passer de consultations ponctuelles à une relation continue, avec un plan de santé suivi dans la durée sous la responsabilité du médecin traitant.</p></li><li class="step"><p class="step_num">04</p><p class="step_title">Make proactive medicine the new standard of care</p><p class="step_text">Déployer ce modèle à grande échelle pour permettre à des millions de personnes de vivre plus longtemps en bonne santé.</p></li></ol><p class="closing">D’abord en France. Puis en Europe.</p></section><div class="signature"><div class="signature_placeholder" role="img" aria-label="Signature de Thibault Lanthier"></div><p class="signature_name">Thibault</p></div></div>
+</article>
+</main>
+<script>
+// Le header prend un filet au scroll, comme sur le site. Rien d'autre ne bouge.
+addEventListener('scroll', function () {
+  document.querySelector('.nav').classList.toggle('is-scrolled', scrollY > 10);
+}, { passive: true });
+</script>
+</body>
+</html>
