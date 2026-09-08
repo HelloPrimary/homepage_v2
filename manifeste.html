@@ -5,127 +5,2774 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Construire la médecine proactive — Primary</title>
 <meta name="description" content="Après trois ans de construction, Thibault Lanthier, CEO et cofondateur de Primary, expose le modèle de soins primaires que nous cherchons à bâtir : une médecine proactive, une nouvelle combinaison entre médecin et IA, et des cabinets ancrés dans le monde réel.">
-<!-- Aperçu de travail : ne doit pas être indexé, la vraie page est sur le site Primary. -->
-<meta name="robots" content="noindex, nofollow">
+<!-- Aperçu de travail : la page qui compte est sur le site Primary. -->
+<meta name="robots" content="noindex,nofollow">
 <style>
-:root { --ink: #101010; --ink-body: rgba(16,16,16,.88); --ink-muted: #5e6266;
-        --rule: rgba(58,28,51,.14); --gold: #efc712; }
-
-@font-face { font-family: Brockmann-Regular;  src: url('fonts/Brockmann-Regular.otf')  format('opentype'); font-display: swap; }
-@font-face { font-family: Brockmann-Medium;   src: url('fonts/Brockmann-Medium.otf')   format('opentype'); font-display: swap; }
-@font-face { font-family: Brockmann-Semibold; src: url('fonts/Brockmann-SemiBold.otf') format('opentype'); font-display: swap; }
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; }
-body { background: #fff; color: var(--ink); font-family: Brockmann-Regular, sans-serif;
-       -webkit-font-smoothing: antialiased; }
-img { max-width: 100%; }
-
-/* Header : réduit au strict nécessaire — sur une page éditoriale il accompagne
-   la lecture au lieu de la concurrencer. */
-.nav { position: fixed; inset: 0 0 auto; height: 85px; display: flex; align-items: center;
-       padding: 0 48px; background: #fff; z-index: 10; transition: box-shadow .3s ease; }
-.nav.is-scrolled { box-shadow: 0 1px 0 rgba(58,28,51,.1); }
-.nav-logo { display: block; }
-.nav-logo svg { height: 26px; width: auto; display: block; }
-@media (max-width: 700px) { .nav { height: 72px; padding: 0 24px; } .nav-logo svg { height: 22px; } }
-
-.manifeste { padding-top: 128px; }
-.hero, .body { width: calc(100% - 96px); max-width: 43.75rem; margin: 0 auto; }
-@media (max-width: 700px) { .manifeste { padding-top: 96px; } .hero, .body { width: calc(100% - 48px); } }
-
-@keyframes settle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-.hero { padding-bottom: 78px; }
-.hero .title, .hero .byline { animation: settle .6s cubic-bezier(.165,.84,.44,1) both; }
-.hero .byline { animation-delay: .08s; }
-@media (prefers-reduced-motion: reduce) { .hero .title, .hero .byline { animation: none; } }
-@media (max-width: 700px) { .hero { padding-bottom: 54px; } }
-
-.title { font-family: Brockmann-Semibold, sans-serif; font-size: clamp(2.375rem, 5.6vw, 4.125rem);
-         line-height: 1.04; letter-spacing: -.032em; text-wrap: balance; margin-bottom: 2.25rem; }
-@media (max-width: 700px) { .title { line-height: 1.08; letter-spacing: -.028em; margin-bottom: 1.75rem; } }
-
-.byline { display: flex; flex-direction: column; gap: .2rem; }
-.author { font-family: Brockmann-Semibold, sans-serif; font-size: 1.0625rem; line-height: 1.4; letter-spacing: -.005em; }
-.role, .date { font-size: 1.0625rem; line-height: 1.4; color: var(--ink-muted); }
-.date { margin-top: .45rem; }
-
-.chapter + .chapter { margin-top: 5.25rem; }
-@media (max-width: 700px) { .chapter + .chapter { margin-top: 3.5rem; } }
-
-.chapter_title { font-family: Brockmann-Semibold, sans-serif;
-                 font-size: clamp(1.75rem, 1.35rem + 1.35vw, 2.125rem); line-height: 1.2;
-                 letter-spacing: -.024em; text-wrap: pretty; margin-bottom: 1.6rem; }
-@media (max-width: 700px) { .chapter_title { margin-bottom: 1.2rem; } }
-
-.p { font-size: clamp(1.125rem, .98rem + .42vw, 1.3125rem); line-height: 1.52;
-     letter-spacing: -.003em; color: var(--ink-body); text-wrap: pretty; }
-.p + .p { margin-top: 1.05em; }
-
-.subhead { font-family: Brockmann-Semibold, sans-serif; font-size: clamp(1.375rem, 1.1rem + .6vw, 1.625rem);
-           line-height: 1.4; letter-spacing: -.013em; text-wrap: pretty; margin: 2.6rem 0 1.05rem; }
-@media (max-width: 700px) { .subhead { margin: 2rem 0 .85rem; } }
-
-.convictions { margin: 1.05em 0; }
-.conviction + .conviction { margin-top: 1.45rem; }
-.conviction_num { font-family: Brockmann-Medium, sans-serif; font-size: .8125rem; line-height: 1.4;
-                  letter-spacing: .08em; font-variant-numeric: tabular-nums; color: var(--gold); margin-bottom: .2rem; }
-.conviction_text { font-size: clamp(1.125rem, .98rem + .42vw, 1.3125rem); line-height: 1.52;
-                   letter-spacing: -.003em; color: var(--ink-body); text-wrap: pretty; }
-.conviction_lead { font-family: Brockmann-Medium, sans-serif; color: var(--ink); }
-
-.proof { font-family: Brockmann-Medium, sans-serif; font-size: clamp(1.125rem, .98rem + .42vw, 1.3125rem);
-         line-height: 1.52; letter-spacing: -.006em; text-wrap: pretty; margin: 1.9rem 0; }
-.proof_figure { font-family: Brockmann-Semibold, sans-serif; font-size: 1.34em; line-height: 1;
-                letter-spacing: -.02em; white-space: nowrap; }
-
-.usecases { margin: 1.6rem 0; }
-.usecases_list { list-style: none; }
-.usecase { position: relative; font-size: clamp(1.0625rem, .98rem + .3vw, 1.25rem); line-height: 1.45;
-           letter-spacing: -.002em; color: var(--ink-body); text-wrap: pretty; padding-left: 1.4rem; }
-.usecase + .usecase { margin-top: .5rem; }
-.usecase_mark { position: absolute; left: 0; color: var(--ink-muted); }
-@media (max-width: 700px) { .usecase { padding-left: 1.1rem; } }
-.usecases_conclusion { font-family: Brockmann-Medium, sans-serif;
-                       font-size: clamp(1.125rem, .98rem + .42vw, 1.3125rem); line-height: 1.52;
-                       letter-spacing: -.006em; text-wrap: pretty; margin-top: 1.35rem; }
-
-.statement { font-family: Brockmann-Semibold, sans-serif; font-size: clamp(1.4375rem, 1.15rem + 1.2vw, 1.875rem);
-             line-height: 1.32; letter-spacing: -.02em; text-wrap: pretty; margin: 3.5rem 0 .75rem; }
-@media (max-width: 700px) {
-  .statement { font-size: clamp(1.3125rem, 1rem + 2.8vw, 1.625rem); line-height: 1.36; margin: 2.5rem 0 .5rem; }
-  .statement_break { display: none; }
+@font-face {
+  font-family: 'Brockmann';
+  src: url('fonts/Brockmann-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brockmann';
+  src: url('fonts/Brockmann-SemiBold.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brockmann';
+  src: url('fonts/Brockmann-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 
-.steps { list-style: none; margin-top: 2.25rem; }
-.step + .step { margin-top: 2rem; }
-@media (max-width: 700px) { .steps { margin-top: 1.75rem; } .step + .step { margin-top: 1.6rem; } }
-.step_num { font-family: Brockmann-Medium, sans-serif; font-size: .8125rem; line-height: 1.4;
-            letter-spacing: .08em; font-variant-numeric: tabular-nums; color: var(--ink-muted); margin-bottom: .35rem; }
-.step_title { font-family: Brockmann-Semibold, sans-serif; font-size: clamp(1.375rem, 1.1rem + .6vw, 1.625rem);
-              line-height: 1.3; letter-spacing: -.016em; text-wrap: balance; margin-bottom: .3rem; }
-.step_text { font-size: clamp(1.0625rem, .95rem + .38vw, 1.25rem); line-height: 1.52;
-             color: var(--ink-body); text-wrap: pretty; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; }
 
-.closing { font-family: Brockmann-Semibold, sans-serif; font-size: clamp(1.4375rem, 1.15rem + 1.2vw, 1.875rem);
-           line-height: 1.3; letter-spacing: -.021em; text-wrap: balance; margin-top: 2.75rem; }
-@media (max-width: 700px) { .closing { font-size: clamp(1.25rem, 1rem + 2.6vw, 1.5rem); margin-top: 2rem; } }
+:root {
+  --bordeaux:     #3a1c33;
+  --bordeaux-dk:  #261222;
+  --gold:         #EFC712;
+  --ink:          #101010;
+  --text:         #2c2f31;
+  --muted:        #5e6266;
+  --faint:        #98a7b6;
+  --bg:           #ffffff;
+  --bg-soft:      #f5f5f5;
+  --bg-blue:      #eaeff2;
+  --border:       #d4dae0;
+  --f: 'Brockmann', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+}
 
-.figure { margin: .6rem 0 2.75rem; }
-.figure_img { display: block; width: 100%; height: auto; border-radius: 10px; }
-@media (max-width: 700px) { .figure { margin: .4rem 0 2rem; } }
+body {
+  font-family: var(--f);
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+}
 
-.signature { margin-top: 4.5rem; padding-bottom: 140px; }
-.signature_placeholder { width: 190px; height: 68px; margin-bottom: .6rem; border-bottom: 1px solid var(--rule); }
-.signature_name { font-family: Brockmann-Semibold, sans-serif; font-size: 1.0625rem; line-height: 1.4; letter-spacing: -.005em; }
+/* ── WIREFRAME BANNER ──────────────────────────── */
+.wf-banner {
+  background: var(--bordeaux-dk);
+  color: rgba(255,255,255,0.55);
+  text-align: center;
+  padding: 9px 2rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+/* ── NAV — intégrée, transparente sur le hero, glass au scroll ── */
+nav {
+  background: transparent;
+  height: 78px;
+  padding: 0 6%;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-radius: 0;
+  box-shadow: none;
+  position: fixed;
+  top: 20px; left: 0; right: 0;
+  z-index: 100;
+  margin: 0;
+  width: 100%;
+  transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  border-bottom: 1px solid transparent;
+}
+
+nav.nav-scrolled {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+  border-bottom-color: rgba(0,0,0,0.04);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  margin-right: 64px;
+}
+
+.nav-logo-mark {
+  height: 26px;
+  width: auto;
+}
+.nav-logo-mark path { fill: #fff; transition: fill 0.4s ease; }
+nav.nav-scrolled .nav-logo-mark path { fill: var(--bordeaux); }
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  flex: 1;
+}
+
+.nav-links a {
+  font-size: 1.0625rem;
+  color: rgba(255,255,255,0.88);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.4s ease;
+}
+.nav-links a:hover { color: #fff; }
+nav.nav-scrolled .nav-links a { color: var(--text); }
+nav.nav-scrolled .nav-links a:hover { color: var(--bordeaux); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.lang-switcher span {
+  cursor: pointer;
+  color: rgba(255,255,255,0.5);
+  transition: color 0.4s ease;
+}
+nav.nav-scrolled .lang-switcher span { color: var(--faint); }
+
+.lang-switcher .active {
+  color: rgba(255,255,255,0.95);
+}
+nav.nav-scrolled .lang-switcher .active { color: var(--ink); }
+
+.btn-secondary {
+  font-family: var(--f);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.88);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.4s ease;
+}
+.btn-secondary:hover { color: #fff; }
+nav.nav-scrolled .btn-secondary { color: var(--text); }
+nav.nav-scrolled .btn-secondary:hover { color: var(--bordeaux); }
+
+.btn-primary {
+  font-family: var(--f);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--gold);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 26px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(16,16,16,0.16); }
+
+.btn-primary-bordeaux {
+  background: var(--bordeaux);
+  color: white;
+}
+.btn-primary-bordeaux:hover { box-shadow: 0 10px 24px rgba(38,18,34,0.28); }
+
+/* ── HERO — immersif, éditorial, la lumière au centre du design ── */
+.hero {
+  position: relative;
+  height: 92vh;
+  min-height: 620px;
+  overflow: hidden;
+  background: #1a1420;
+  border-radius: 0;
+  z-index: 1;
+}
+
+.hero-photo-placeholder {
+  position: absolute;
+  inset: 0;
+  background-image: url('hero-focus-medecin.png');
+  background-size: cover;
+  background-position: 58% 22%;
+}
+
+/* Kept for layout compat */
+.hero-photo-right { display: none; }
+.hero-photo-label { display: none; }
+
+/* Voile très léger : juste ce qu'il faut pour la lisibilité, la lumière reste au premier plan */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(20,12,20,0.3) 0, rgba(20,12,20,0) 160px),
+    linear-gradient(to top, rgba(20,12,20,0.5) 0%, rgba(20,12,20,0.06) 32%, rgba(20,12,20,0) 55%),
+    linear-gradient(to right, rgba(20,12,20,0.38) 0%, rgba(20,12,20,0.1) 38%, rgba(20,12,20,0) 65%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  padding: 0 6%;
+}
+
+.hero-title {
+  font-family: var(--f);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 5.25vw, 5.15rem); /* -6% pour se rapprocher du sous-titre */
+  color: white;
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  max-width: 560px;
+  margin-bottom: 1.1rem; /* resserré : les deux niveaux se lisent comme une seule idée */
+}
+.hero-title .nb { white-space: nowrap; }
+
+.hero-subtitle {
+  font-family: var(--f);
+  font-weight: 500;
+  font-size: clamp(1.73rem, 2vw, 2.125rem); /* ≈34px, +2px */
+  color: rgba(255,255,255,0.88);
+  line-height: 1.32;
+  letter-spacing: -0.01em;
+  max-width: 720px; /* chaque phrase courte tient sur sa propre ligne, sans retour artificiel */
+  margin-bottom: 3.5rem; /* ~56px */
+}
+
+.hero-cta {
+  display: inline-block;
+  font-family: var(--f);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--gold);
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.22); }
+
+.hero-btn {
+  font-family: var(--f);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--gold);
+  border: none;
+  border-radius: 10px;
+  padding: 14px 28px;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.hero-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.22); }
+
+/* ── BLOC 2 — NOTRE VISION (manifeste + engagements fusionnés) ── */
+.bloc-vision {
+  background: #FAF8F5;
+  padding: 130px 6% 94px;
+}
+
+.vision-grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 96px;
+  align-items: start;
+}
+
+.vision-left {
+  position: sticky;
+  top: 140px;
+}
+
+.vision-eyebrow {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 28px;
+}
+
+.vision-statement {
+  font-family: var(--f);
+  font-size: clamp(1.5rem, 2.3vw, 2.05rem);
+  color: var(--ink);
+  line-height: 1.42;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.bloc-proof {
+  background: #FAF8F5;
+  padding: 96px 6% 128px;
+}
+
+.proof-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.proof-stat {
+  flex: 1;
+  text-align: center;
+  padding: 0 3rem;
+}
+
+.proof-stat + .proof-stat {
+  border-left: 1px solid rgba(16,16,16,0.1);
+}
+
+.proof-number {
+  font-family: var(--f);
+  font-size: clamp(1.9rem, 2.6vw, 2.5rem);
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.proof-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.proof-sublabel {
+  margin-top: 8px;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .bloc-proof { padding: 64px 1.5rem 72px; }
+  .proof-inner { flex-direction: column; gap: 40px; }
+  .proof-stat { padding: 0; }
+  .proof-stat + .proof-stat { border-left: none; }
+}
+
+.vision-statement em {
+  color: var(--muted);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.vision-photo {
+  position: relative;
+  width: 100%;
+  height: 460px;
+  border-radius: 20px;
+  overflow: visible;
+  margin-bottom: 56px;
+}
+
+.vision-photo-img {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background-image: url('image manifeste.png');
+  background-size: cover;
+  background-position: 50% 80%;
+  box-shadow: 0 24px 60px rgba(38,18,34,0.16);
+}
+
+/* ── Widgets — un indice, jamais un écran ── */
+.vision-widget {
+  position: absolute;
+  background: rgba(255,255,255,0.86);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: 0 16px 40px rgba(38,18,34,0.16);
+  z-index: 2;
+}
+
+/* En-tête commun aux 2 cartes : picto + libellé, même format */
+.vw-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.vw-header svg {
+  width: 12px; height: 12px;
+  fill: none; stroke: currentColor;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  flex-shrink: 0;
+}
+.vw-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Widget 1 — score */
+.vw-score {
+  top: -28px;
+  left: -24px;
+  width: 190px;
+}
+.vw-score .vw-header { color: var(--muted); }
+.vw-score-num {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.vw-score-denom {
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+.vw-gauge-track {
+  height: 4px;
+  background: rgba(58,28,51,0.12);
+  border-radius: 99px;
+  overflow: hidden;
+  margin: 12px 0 10px;
+}
+.vw-gauge-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--bordeaux);
+}
+.vw-score-sub {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Widget 2 — dépistage : même format d'en-tête que la carte score */
+.vw-reminder {
+  bottom: -24px;
+  right: -20px;
+  width: 230px;
+}
+.vw-reminder .vw-header { color: #b8860b; }
+.vw-reminder .vw-label { color: #b8860b; }
+.vw-reminder-sub {
+  font-size: 0.86rem;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .vw-score { top: -18px; left: -14px; width: 168px; padding: 14px 16px; }
+  .vw-score-num { font-size: 2.1rem; }
+  .vw-reminder { bottom: -18px; right: -14px; width: 210px; padding: 14px 16px; }
+  .vw-reminder-sub { font-size: 0.78rem; }
+}
+
+.vision-commitments {
+  list-style: none;
+}
+
+.vision-commitment {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 26px 0;
+  border-top: 1px solid rgba(58,28,51,0.1);
+}
+.vision-commitment:last-child { padding-bottom: 0; }
+
+.vc-check {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--bordeaux);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+.vc-check svg {
+  width: 11px;
+  height: 11px;
+  stroke: var(--bordeaux);
+  fill: none;
+  stroke-width: 2.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vc-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 5px;
+}
+
+.vc-sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .vision-grid { grid-template-columns: 1fr; gap: 56px; }
+  .vision-left { position: static; }
+  .vision-photo { height: 340px; margin-bottom: 40px; }
+}
+
+/* TEXT SWAP — bloc autonome */
+.ts-variable {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.rotating-group {
+  display: block;
+  color: #6b2458;
+  will-change: transform, opacity;
+}
+
+/* ── BLOC 4 — TIMELINE ── */
+.bloc-programme {
+  background: white;
+  padding: 60px 6% 72px;
+  overflow: visible;
+}
+
+.prog-header {
+  max-width: none;
+  margin: 0 auto 7.5rem;
+  text-align: center;
+  overflow: visible;
+}
+
+.prog-header .bloc-title {
+  font-size: clamp(2.5rem, 4.6vw, 4.1rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 0;
+  white-space: nowrap;
+  overflow: visible;
+}
+
+.prog-header .bloc-eyebrow { color: var(--muted); text-align: left; }
+.prog-header .bloc-title   { color: var(--ink); }
+.prog-header .bloc-subtitle { color: var(--muted); }
+
+.prog-eyebrow {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 20px;
+}
+
+.bloc-title {
+  font-weight: 600;
+  font-size: clamp(1.7rem, 2.8vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.85rem;
+  text-wrap: balance;
+}
+
+.bloc-subtitle {
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* Track */
+.cards-track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-right: 6%;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.cards-track::-webkit-scrollbar { display: none; }
+.cards-track.dragging { cursor: grabbing; user-select: none; }
+
+/* Card */
+.prog-card {
+  flex-shrink: 0;
+  width: 280px;
+  height: 520px;
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: width 0.42s cubic-bezier(0.4,0,0.2,1);
+}
+
+.prog-card.active { width: 440px; }
+
+.prog-card:not(.active) .card-insert { opacity: 0; transform: translateY(10px); pointer-events: none; }
+.prog-card.active .card-insert       { opacity: 1; transform: translateY(0); }
+.prog-card:not(.active) .card-desc   { opacity: 0.9; }
+.prog-card.active .card-desc         { opacity: 1; }
+
+/* Simulated photo backgrounds with grain */
+.card-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.card-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,0.28) 0%,
+    rgba(0,0,0,0.55) 45%,
+    rgba(0,0,0,0.92) 100%
+  );
+}
+
+/* Card content */
+.card-content {
+  position: absolute;
+  inset: 0;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+
+.card-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 20px;
+  padding: 6px 12px;
+}
+
+.pill-num {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.pill-label {
+  font-size: 0.63rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.82);
+  font-weight: 500;
+}
+
+/* Bottom text */
+.card-bottom {}
+
+.card-title {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: white;
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
+}
+
+.card-desc {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.6;
+  max-width: 32ch;
+  transition: opacity 0.3s 0.1s;
+}
+
+/* UI Insert */
+.card-insert {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 100px;
+  background: white;
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  transition: opacity 0.35s, transform 0.35s;
+  font-size: 0.75rem;
+}
+
+.ins-header {
+  font-size: 0.57rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ins-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #2a9e5f;
+  flex-shrink: 0;
+}
+
+.ins-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--ink);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.ins-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  font-size: 0.73rem;
+  color: var(--text);
+  border-bottom: 1px solid #f2f2f2;
+}
+.ins-row:last-child { border-bottom: none; }
+
+.ins-val-good  { font-weight: 600; color: #2a9e5f; }
+.ins-val-warn  { font-weight: 600; color: #c8780a; }
+
+.ins-check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  font-size: 0.73rem;
+  color: var(--text);
+}
+
+.ins-check {
+  width: 17px; height: 17px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+}
+
+.ins-check.done   { background: #2a9e5f; color: white; }
+.ins-check.todo   { border: 1.5px solid #ddd; }
+
+.ins-bar-wrap { margin-top: 4px; }
+.ins-bar {
+  height: 3px;
+  background: #eee;
+  border-radius: 2px;
+  margin-top: 4px;
+  overflow: hidden;
+}
+.ins-bar-fill {
+  height: 100%;
+  background: var(--bordeaux);
+  border-radius: 2px;
+}
+
+/* Chat insert */
+.chat-bubble {
+  background: #f0f2f5;
+  border-radius: 10px 10px 10px 2px;
+  padding: 8px 11px;
+  font-size: 0.73rem;
+  color: var(--ink);
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.chat-reply {
+  background: var(--bordeaux);
+  color: white;
+  border-radius: 10px 10px 2px 10px;
+  padding: 8px 11px;
+  font-size: 0.73rem;
+  line-height: 1.5;
+  margin-left: 16px;
+}
+
+.chat-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #f2f2f2;
+  font-size: 0.65rem;
+  color: var(--muted);
+}
+
+.badge-check {
+  width: 16px; height: 16px;
+  background: #2a9e5f;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 9px;
+  flex-shrink: 0;
+}
+
+/* Nav row */
+.prog-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 2rem;
+  padding-right: 6%;
+}
+
+.nav-arrow {
+  width: 38px; height: 38px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.nav-arrow:hover { background: rgba(255,255,255,0.14); }
+
+.prog-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.prog-dot {
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.22);
+  transition: width 0.3s, background 0.3s;
+  width: 5px;
+}
+
+.prog-dot.active {
+  width: 22px;
+  background: var(--gold);
+}
+
+/* ── BLOC 5 — TÉMOIGNAGES ──────────────────────── */
+/* ── BLOC 5 — PORTRAITS MÉDECINS (vidéo, éditorial) ── */
+.bloc-medecins {
+  background: #F7F6F3;
+  padding: 170px 0 150px 6%;
+  border-radius: 48px 48px 0 0;
+  margin-top: -48px;
+  position: relative;
+  z-index: 2;
+}
+
+.medecins-head {
+  max-width: none;
+  margin: 0 auto 72px;
+  padding: 0 6%;
+  text-align: center;
+}
+
+.medecins-title {
+  font-weight: 500;
+  font-size: clamp(1.3rem, 3.6vw, 2.4rem);
+  color: var(--ink);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+
+/* Rail de reels — mur de contenu éditorial, rythme volontairement irrégulier (pas une grille) */
+.reels-rail {
+  display: flex;
+  align-items: flex-end;
+  gap: 28px;
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  padding: 40px 6% 8px 0;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.reels-rail::-webkit-scrollbar { display: none; }
+.reels-rail.dragging { cursor: grabbing; user-select: none; scroll-snap-type: none; }
+
+/* Galerie éditoriale « Vos médecins » — série photographique, pas un trombinoscope :
+   cadres identiques (aucune hiérarchie), débordement franc à droite qui suggère que
+   le collectif continue hors champ. Pas de pagination, pas de flèches, pas de dots. */
+.med-rail-wrap { position: relative; }
+
+/* La série débute déjà entamée — le premier portrait est en partie hors champ,
+   comme s'il continuait vers la gauche autant que vers la droite */
+.med-rail-wrap::before {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 5%;
+  pointer-events: none; z-index: 2;
+  background: linear-gradient(to right, #F7F6F3, rgba(247,246,243,0));
+}
+
+.med-rail {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  padding: 6px 0 6px;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.med-rail::-webkit-scrollbar { display: none; }
+.med-rail.dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+
+/* Portrait — même gabarit pour tous, pensé pour accueillir un short vidéo
+   vertical demain sans rien redessiner (ratio, radius et hover déjà prêts).
+   Seule la position verticale varie, sur 3 paliers très légers — jamais la taille :
+   ça donne du rythme à la série sans jamais suggérer de hiérarchie entre médecins.
+   Gabarit large (~3,5-4 visibles sur desktop) pour que les visages dominent la scène. */
+.med-item { flex: 0 0 auto; scroll-snap-align: start; }
+.med-item.lvl-1 { margin-top: 24px; }
+.med-item.lvl-2 { margin-top: 42px; }
+
+.med-frame {
+  position: relative;
+  width: clamp(280px, 23vw, 350px);
+  aspect-ratio: 3 / 4;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #EFE6D3;
+}
+.med-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 15%;
+  display: block;
+  transform: scale(1.02);
+  transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.med-frame:hover img { transform: scale(1.06); }
+.med-frame img.zoom-10 { transform: scale(1.12); }
+.med-frame:hover img.zoom-10 { transform: scale(1.18); }
+
+/* Nom sous le portrait — hors de la photo, très discret : un repère, pas une fiche */
+.med-name {
+  margin-top: 12px;
+  font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .med-frame { width: 62vw; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .med-frame img { transition: none; }
+}
+
+.reel-card {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(190px, 20vw, 280px);
+  aspect-ratio: 9 / 16;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #111;
+  scroll-snap-align: start;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.reel-card:hover { transform: translateY(-8px); box-shadow: 0 28px 56px rgba(38,18,34,0.22); }
+
+/* Rythme du mur : tailles, ratios et décalages verticaux volontairement différents */
+.reel-card:nth-child(1) { width: clamp(220px, 24vw, 320px); }
+.reel-card:nth-child(2) { aspect-ratio: 3 / 4; align-self: flex-start; margin-bottom: 46px; }
+.reel-card:nth-child(3) { width: clamp(210px, 22vw, 300px); }
+.reel-card:nth-child(4) { width: clamp(200px, 21vw, 290px); }
+.reel-card:nth-child(5) { aspect-ratio: 1 / 1; align-self: flex-start; margin-bottom: 20px; width: clamp(180px, 19vw, 260px); }
+.reel-card:nth-child(6) { width: clamp(215px, 23vw, 310px); }
+
+.reel-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  background: #111;
+  transform: scale(1.08);
+  transform-origin: center;
+  transition: transform 0.6s ease;
+}
+.reel-card:hover .reel-video { transform: scale(1.13); }
+
+/* Affordance vidéo : durée, son et légende recréés en CSS pour s'adapter au format réel de chaque carte, sans jamais être rognés */
+.reel-duration {
+  position: absolute; top: 12px; left: 12px;
+  padding: 5px 9px; border-radius: 8px;
+  background: rgba(20,18,20,0.55);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  font-size: 0.68rem; font-weight: 600; color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+.reel-sound {
+  position: absolute; top: 12px; right: 12px;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(20,18,20,0.4);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+}
+.reel-sound svg { width: 13px; height: 13px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.reel-caption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 34px 16px 14px;
+  background: linear-gradient(to top, rgba(20,10,18,0.68), rgba(20,10,18,0) 100%);
+  font-size: 0.8rem; font-weight: 500; color: #fff;
+  line-height: 1.4; text-align: center;
+}
+.reel-play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px);
+  border: 1px solid rgba(255,255,255,0.6);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0.9;
+  transition: transform 0.35s ease, background 0.35s ease, opacity 0.35s ease;
+}
+.reel-play svg { width: 13px; height: 13px; margin-left: 2px; fill: #fff; }
+.reel-card:hover .reel-play {
+  transform: translate(-50%, -50%) scale(1.12);
+  background: rgba(255,255,255,0.34);
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reel-video, .reel-play { transition: none; }
+}
+
+/* ── BLOC · FAQ — dernière étape de réassurance avant le CTA final ── */
+.faq-section {
+  background: #FAF8F5;
+  padding: 110px 6% 170px;
+}
+
+.faq-grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 96px;
+  align-items: start;
+}
+
+.faq-intro { position: sticky; top: 120px; }
+
+.faq-eyebrow {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+.faq-headline {
+  font-family: var(--f);
+  font-size: clamp(1.5rem, 2.3vw, 2.05rem);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.32;
+  letter-spacing: -0.01em;
+  max-width: 15ch;
+}
+
+/* Accordéon dépouillé : pas de card, pas d'ombre — la typographie et l'espace
+   font toute la hiérarchie. Une seule question ouverte à la fois. */
+.faq-list { border-top: 1px solid rgba(16,16,16,0.1); }
+
+.faq-item { border-bottom: 1px solid rgba(16,16,16,0.1); }
+
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 26px 0;
+  font-family: var(--f);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.25s ease;
+}
+.faq-q:hover { color: var(--bordeaux); }
+
+.faq-q-mark {
+  position: relative;
+  flex-shrink: 0;
+  width: 15px; height: 15px;
+}
+.faq-q-mark::before, .faq-q-mark::after {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  background: var(--ink);
+  transition: transform 0.35s cubic-bezier(0.65,0,0.35,1), opacity 0.35s ease;
+}
+.faq-q-mark::before { width: 15px; height: 1.4px; transform: translate(-50%, -50%); }
+.faq-q-mark::after  { width: 1.4px; height: 15px; transform: translate(-50%, -50%); }
+.faq-item.open .faq-q-mark::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+.faq-item.open .faq-q-mark::before { transform: translate(-50%, -50%) rotate(180deg); }
+
+.faq-a-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.65,0,0.35,1);
+}
+.faq-item.open .faq-a-wrap { grid-template-rows: 1fr; }
+
+.faq-a-inner { overflow: hidden; }
+
+.faq-a {
+  padding: 0 0 28px;
+  max-width: 58ch;
+}
+.faq-a p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--muted);
+}
+.faq-a p + p { margin-top: 14px; }
+.faq-a a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+
+@media (max-width: 860px) {
+  .faq-section { padding: 90px 1.5rem 100px; }
+  .faq-grid { grid-template-columns: 1fr; gap: 44px; }
+  .faq-intro { position: static; }
+  .faq-headline { max-width: none; }
+  .faq-q { font-size: 0.98rem; padding: 22px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-a-wrap, .faq-q-mark::before, .faq-q-mark::after { transition: none; }
+}
+
+/* ── BLOC 6 — CTA FINAL ────────────────────────── */
+/* CTA final — dernière page éditoriale, pas un second hero */
+.bloc-cta {
+  background: var(--gold);
+  padding: 150px 6% 130px;
+  text-align: left;
+  border-radius: 48px 48px 0 0;
+  margin-top: -48px;
+  position: relative;
+  z-index: 3;
+}
+
+.cta-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.cta-title {
+  font-family: var(--f);
+  font-weight: 600;
+  font-size: clamp(2rem, 3.8vw, 3.3rem);
+  color: var(--bordeaux);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+.cta-link {
+  display: inline-block;
+  font-family: var(--f);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--bordeaux);
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.cta-link:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(38,18,34,0.3); }
+
+@media (max-width: 768px) {
+  .bloc-cta { padding: 90px 1.5rem 90px; }
+  .cta-inner { flex-direction: column; align-items: flex-start; gap: 28px; }
+}
+
+/* ── FOOTER (repris de helloprimary.care, sans le bandeau titre + CTA) ── */
+footer {
+  background: var(--gold);
+  padding: 64px 6% 0;
+}
+
+.footer-wrap { max-width: 1180px; margin: 0 auto; }
+
+.footer-line {
+  height: 1px;
+  background: rgba(16,16,16,0.3);
+  margin-bottom: 48px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 64px;
+  padding-bottom: 56px;
+}
+
+.footer-col h4 {
+  font-family: var(--f);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--bordeaux);
+  margin-bottom: 16px;
+}
+
+.footer-col-links { display: flex; flex-direction: column; gap: 10px; }
+
+.footer-col-links a {
+  font-size: 0.85rem;
+  color: var(--bordeaux);
+  text-decoration: none;
+}
+.footer-col-links a:hover { text-decoration: underline; }
+
+.footer-social a {
+  display: inline-flex;
+  width: 32px; height: 32px;
+  align-items: center;
+  justify-content: center;
+}
+.footer-social svg { width: 20px; height: 20px; fill: var(--bordeaux); }
+
+.footer-wordmark {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: hidden;
+}
+.footer-wordmark path { fill: var(--bordeaux); }
+
+@media (max-width: 768px) {
+  footer { padding: 48px 1.5rem 0; }
+  .footer-links { gap: 36px; padding-bottom: 40px; }
+}
+
+/* ── UTILITIES ─────────────────────────────────── */
+@media (max-width: 768px) {
+  nav { padding: 0 1.75rem; }
+  .nav-links, .lang-switcher { display: none; }
+  .hero-content { padding: 0 1.5rem 6rem; }
+  .hero-title .nb { white-space: normal; }
+  .bloc-vision, .bloc-programme { padding: 60px 1.5rem; }
+  .bloc-vision { padding-top: 116px; }
+  .bloc-programme { padding-top: 96px; }
+  .bloc-programme .prog-header { margin: 0 auto 2.3rem; }
+  .bloc-medecins { padding: 60px 0 60px 1.5rem; }
+  .medecins-head { padding-right: 1.5rem; }
+  .medecins-title { font-size: clamp(1.05rem, 6.5vw, 1.5rem); }
+  .step { grid-template-columns: 1fr; }
+  .step-left { border-right: none; border-bottom: 1px solid var(--border); }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+}
+/* ── TIMELINE VERTICALE — parcours (remplace le carrousel) ── */
+.bloc-programme { padding: 130px 6% 72px; overflow: visible; }
+.bloc-programme .prog-header { max-width: none; margin: 0 auto 2.3rem; text-align: center; }
+
+.timeline { position: relative; max-width: 920px; margin: 0 auto; }
+.tl-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  column-gap: 12px;
+  padding-bottom: 52px;
+}
+.tl-step:last-child { padding-bottom: 0; }
+.tl-rail { position: relative; display: flex; justify-content: center; }
+.tl-rail::before {
+  content: '';
+  position: absolute;
+  top: 44px; bottom: -52px; left: 50%;
+  width: 1px;
+  background: rgba(255,255,255,0.15);
+  transform: translateX(-50%);
+}
+.tl-step:last-child .tl-rail::before { display: none; }
+.tl-num {
+  position: relative;
+  z-index: 1;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 700;
+  color: var(--gold);
+  background: var(--ink);
+  border: 1px solid rgba(239,199,18,0.5);
+}
+.tl-body {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 26px;
+  align-items: start;
+  padding-top: 2px;
+}
+.tl-media {
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: #1b1b1b;
+}
+.tl-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tl-label {
+  display: block;
+  font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.55rem;
+}
+.tl-title {
+  font-weight: 600; font-size: 1.35rem;
+  color: white; line-height: 1.25;
+  margin-bottom: 0.5rem;
+}
+.tl-desc {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.62);
+  line-height: 1.65;
+  margin-bottom: 1.1rem;
+  max-width: 44ch;
+}
+.tl-insert {
+  background: white;
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  font-size: 0.75rem;
+  max-width: 340px;
+}
+@media (max-width: 768px) {
+  .tl-step { grid-template-columns: 40px 1fr; column-gap: 10px; padding-bottom: 40px; }
+  .tl-rail::before { bottom: -40px; }
+  .tl-num { width: 34px; height: 34px; font-size: 0.72rem; }
+  .tl-body { grid-template-columns: 1fr; gap: 14px; }
+  .tl-media { aspect-ratio: 16 / 9; }
+  .tl-insert { max-width: none; }
+}
+/* ── AJUSTEMENTS (retours) ── */
+/* Hero : centrage vertical du texte */
+.hero-content { padding: 0 6%; }
+
+/* Timeline : titre du bloc */
+.bloc-programme .prog-header { max-width: none; }
+.bloc-programme .bloc-title { white-space: nowrap; }
+@media (max-width: 900px) {
+  .bloc-programme .bloc-title { white-space: normal; font-size: 1.5rem; }
+}
+
+/* ── STEPPER — parcours produit (compact, remplace la timeline verticale) ── */
+.bloc-programme { padding: 130px 6% 72px; overflow: visible; }
+.bloc-programme .prog-header { max-width: none; margin: 0 auto 2.3rem; text-align: center; }
+
+.stepper { max-width: 1080px; margin: 0 auto; }
+.stepper-rail-wrap { max-width: 1080px; margin: 0 auto; }
+
+/* ═══ Scrollytelling : le scroll pilote le parcours ═══ */
+.stepper-scroll { position: relative; }
+@media (min-width: 769px) {
+  .stepper-scroll { height: calc(5 * 86vh); }
+  .stepper-sticky {
+    position: sticky; top: 0;
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 3vh 0;
+  }
+  .stepper-sticky .stepper { width: 100%; }
+  .stepper-sticky .sp-scene { max-height: 58vh; }
+  .stepper-sticky .stepper-rail-wrap { flex: none; margin-bottom: 2.4rem; }
+  .stepper-sticky .stepper-rail { margin-bottom: 0; }
+}
+
+/* ── Navigation éditoriale — table des matières, pas un stepper ── */
+.stepper-rail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  column-gap: 32px;
+  row-gap: 14px;
+  margin-bottom: 5rem;
+  position: relative;
+}
+
+.stepper-tab {
+  flex: none;
+  background: none; border: none; cursor: pointer;
+  display: inline-flex; align-items: baseline; gap: 10px;
+  padding: 0 0 14px;
+  position: relative;
+  font-family: var(--f);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.4s ease;
+}
+
+.stepper-num {
+  font-size: 0.7rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+  color: var(--faint);
+  transition: color 0.4s ease;
+}
+
+.stepper-tablabel {
+  font-size: 1.05rem;
+  font-weight: 450;
+  color: var(--muted);
+  text-align: left;
+  line-height: 1.3;
+  max-width: none;
+  letter-spacing: -0.005em;
+  transition: color 0.4s ease, font-weight 0.4s ease;
+}
+
+.stepper-tab.active { border-bottom-color: var(--bordeaux); }
+.stepper-tab.active .stepper-num { color: var(--bordeaux); }
+.stepper-tab.active .stepper-tablabel { color: var(--ink); font-weight: 600; }
+
+.stepper-tab.done .stepper-num { color: var(--muted); }
+.stepper-tab.done .stepper-tablabel { color: var(--muted); }
+
+.stepper-tab:hover:not(.active) .stepper-tablabel { color: var(--ink); }
+.stepper-tab:hover:not(.active) { border-bottom-color: rgba(58,28,51,0.2); }
+
+/* Panels */
+.stepper-panels { display: grid; }
+.stepper-panel {
+  grid-area: 1 / 1;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 56px;
+  align-items: center;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.45s ease;
+}
+.stepper-panel.active { opacity: 1; visibility: visible; }
+
+/* ═══ Scène unifiée : même taille pour les 5 étapes ═══ */
+.sp-scene {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;              /* taille identique partout */
+  display: flex; align-items: center; justify-content: center;
+  overflow: visible;
+}
+/* Sujet « photo » : remplit la scène, sans fond violet */
+.sp-scene-photo {
+  position: relative;
+  width: 100%; height: 100%;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(38,18,34,0.18);
+}
+.sp-scene-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+/* léger dégradé pour asseoir les cartes */
+.sp-scene-photo::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(38,18,34,0.16), rgba(38,18,34,0) 42%);
+}
+
+.sp-title {
+  font-weight: 600; font-size: clamp(1.4rem, 2vw, 2rem); color: var(--ink);
+  line-height: 1.22; margin-bottom: 1rem; letter-spacing: -0.015em;
+}
+.sp-desc {
+  font-size: 0.97rem; color: var(--muted);
+  line-height: 1.72; margin-bottom: 1.4rem; max-width: 38ch;
+}
+@media (max-width: 768px) {
+  .stepper-rail { gap: 8px 24px; margin-bottom: 2rem; }
+  .stepper-tablabel { font-size: 0.88rem; }
+  .stepper-panel { grid-template-columns: 1fr; gap: 16px; }
+  .sp-media { aspect-ratio: 16 / 9; }
+  .tl-insert { max-width: none; }
+}
+/* ═══ MONDE CLAIR ═══ */
+.bloc-programme   { background: #fff; border-top: none; }
+.bloc-programme   { padding: 130px 6% 72px; }
+
+/* Phrase tournante — texte foncé */
+.text-swap-headline { color: var(--ink); }
+.rotating-word { color: #6b2458; }
+.text-swap-sub { color: var(--muted); }
+
+/* Programme — overrides nettoyés (styles définis directement dans les règles) */
+.sp-title { color: var(--ink); }
+.sp-desc { color: var(--muted); }
+.tl-insert { border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(38,18,34,0.08); }
+
+
+/* ═══ PRODUCT DEMO — système d'animation ═══ */
+@keyframes pdFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pdGaugeFill { from { width: 0; } to { width: var(--w); } }
+
+.pd-anim { opacity: 0; }
+.stepper-panel.active .pd-a1 { animation: pdFadeUp 0.45s ease 0.05s both; }
+.stepper-panel.active .pd-a2 { animation: pdFadeUp 0.45s ease 0.2s both; }
+.stepper-panel.active .pd-a3 { animation: pdFadeUp 0.45s ease 0.35s both; }
+.stepper-panel.active .pd-a4 { animation: pdFadeUp 0.45s ease 0.5s both; }
+.stepper-panel.active .pd-gauge-fill { animation: pdGaugeFill 0.9s cubic-bezier(0.16,1,0.3,1) both; }
+.stepper-panel.active .pd-g1 .pd-gauge-fill { animation-delay: 0.28s; }
+.stepper-panel.active .pd-g2 .pd-gauge-fill { animation-delay: 0.4s; }
+.stepper-panel.active .pd-g3 .pd-gauge-fill { animation-delay: 0.52s; }
+.stepper-panel.active .pd-g4 .pd-gauge-fill { animation-delay: 0.64s; }
+.stepper-panel.active .pd-g5 .pd-gauge-fill { animation-delay: 0.76s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-anim { opacity: 1; }
+  .stepper-panel.active [class*="pd-a"] { animation: none; }
+  .pd-gauge-fill { width: var(--w); animation: none; }
+}
+
+/* ── Carte flottante (posée autour de la scène) ── */
+.pd-float {
+  position: absolute;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 16px;
+  padding: 13px 15px;
+  box-shadow: 0 10px 30px rgba(38,18,34,0.14), 0 2px 6px rgba(38,18,34,0.06);
+  z-index: 2;
+}
+
+/* ── Atoms ── */
+.pd-label {
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--muted);
+}
+.pd-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  border-radius: 20px; padding: 3px 10px;
+  font-size: 0.62rem; font-weight: 600;
+}
+.pd-chip-green    { background: rgba(42,158,95,0.14); color: #1f7a4a; }
+.pd-chip-amber    { background: rgba(245,158,11,0.16); color: #92400e; }
+.pd-chip-bordeaux { background: rgba(58,28,51,0.09); color: var(--bordeaux); }
+
+/* ── Icône IA ── */
+.pd-ai-icon {
+  flex-shrink: 0; width: 26px; height: 26px;
+  border-radius: 8px; background: #EEEAF7;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ── Ligne « donnée récupérée » (checklist verte) ── */
+.pd-checkline { display: flex; align-items: center; gap: 9px; }
+.pd-checkline + .pd-checkline { margin-top: 9px; }
+.pd-check-dot {
+  width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
+  background: #2a9e5f; display: flex; align-items: center; justify-content: center;
+}
+.pd-check-label { font-size: 0.78rem; font-weight: 500; color: var(--ink); }
+
+/* ── Carte de synthèse IA ── */
+.pd-synth-head {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+}
+.pd-synth-title { font-size: 0.72rem; font-weight: 700; color: var(--bordeaux); }
+.pd-synth-body { font-size: 0.78rem; color: var(--ink); line-height: 1.5; }
+
+/* ── Jauge simple ── */
+.pd-gauge-label { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--muted); margin-bottom: 5px; }
+.pd-gauge-val { color: var(--ink); font-weight: 600; }
+.pd-gauge-track { height: 5px; background: #e9e2ee; border-radius: 3px; overflow: hidden; }
+.pd-gauge-fill { height: 100%; width: 0; border-radius: 3px; background: var(--bordeaux); }
+
+/* ── Notification / rappel ── */
+.pd-notif { display: flex; align-items: flex-start; gap: 10px; }
+.pd-notif-icon {
+  width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.pd-notif-icon-green  { background: rgba(42,158,95,0.14); color: #1f7a4a; }
+.pd-notif-icon-purple { background: #EEEAF7; color: var(--bordeaux); }
+.pd-notif-icon-amber  { background: rgba(245,158,11,0.16); color: #92400e; }
+.pd-notif-title { font-size: 0.76rem; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.pd-notif-sub   { font-size: 0.66rem; color: var(--muted); margin-top: 2px; }
+
+/* ── Bulle de conversation ── */
+.pd-bubble {
+  border-radius: 14px; padding: 11px 14px;
+  font-size: 0.8rem; line-height: 1.5;
+}
+.pd-bubble-patient { background: var(--bordeaux); color: rgba(255,255,255,0.94); }
+.pd-bubble-ai      { background: #fff; color: var(--ink); }
+
+/* ── Étape 1 : fiche patient (façon Apple Health) ── */
+.pd-fiche {
+  padding: 18px 20px;
+  background: #fff;
+  border-radius: 22px;
+  border: 1px solid #ECECEC;
+  box-shadow: 0 20px 55px rgba(38,18,34,0.13);
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+.pd-fiche-head {
+  display: flex; align-items: center; gap: 13px;
+  padding-bottom: 16px; margin-bottom: 16px;
+  border-bottom: 1px solid #F1F1F1;
+}
+.pd-fiche-photo {
+  width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
+  object-fit: cover; object-position: 50% 30%;
+}
+.pd-fiche-name { font-size: 0.92rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
+.pd-fiche-age  { font-size: 0.72rem; color: var(--muted); margin-top: 3px; }
+.pd-fiche-rows { display: flex; flex-direction: column; gap: 14px; }
+.pd-fiche-row {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.82rem; font-weight: 500; color: var(--ink);
+}
+.pd-fiche-ic { flex-shrink: 0; color: #3a1c33; display: flex; }
+.pd-fiche-ic svg {
+  width: 17px; height: 17px; fill: none;
+  stroke: currentColor; stroke-width: 1.7;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* ── Étape 3 : carte « Plan personnalisé » (pendant du bilan) ── */
+.plan-card {
+  padding: 0; overflow: hidden;
+  background: #fff; border: 1px solid #ECECEC; border-radius: 20px;
+  box-shadow: 0 20px 55px rgba(38,18,34,0.16);
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+.plan-card-label {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted);
+  padding: 16px 18px 0;
+}
+.plan-items { padding: 18px 20px 6px; display: flex; flex-direction: column; gap: 18px; }
+.plan-group-label {
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 9px;
+}
+.plan-line { font-size: 0.86rem; font-weight: 500; color: var(--ink); line-height: 1.5; }
+.plan-line + .plan-line { margin-top: 7px; }
+.plan-foot {
+  margin-top: 10px; padding: 13px 20px 16px;
+  border-top: 1px solid #F1F1F1;
+  font-size: 0.7rem; font-weight: 500; color: var(--muted);
+  display: flex; align-items: center; gap: 7px;
+}
+.plan-foot-check {
+  width: 15px; height: 15px; border-radius: 50%; background: #2a9e5f; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ── Étape 5 : bulles de conversation posées sur la photo (façon Messages) ── */
+.msg {
+  position: absolute; max-width: 210px;
+  padding: 11px 14px; border-radius: 19px;
+  font-size: 0.8rem; line-height: 1.45;
+  box-shadow: 0 10px 32px rgba(38,18,34,0.22);
+  opacity: 0;
+}
+.msg-patient {
+  background: rgba(58,28,51,0.90); color: #fff;
+  border-bottom-right-radius: 6px;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.msg-amia {
+  background: rgba(255,255,255,0.82); color: var(--ink);
+  border-bottom-left-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.55);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+}
+/* Statut de transmission : élément autonome, hors bulle — marque un changement d'état du parcours, pas une métadonnée de message */
+.msg-transmit { position: absolute; opacity: 0; }
+.msg-transmit-sending, .msg-transmit-done {
+  position: absolute; top: 0; right: 0;
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  padding: 7px 13px 7px 10px; border-radius: 20px;
+  background: rgba(255,255,255,0.82);
+  border: 1px solid rgba(255,255,255,0.55);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 28px rgba(38,18,34,0.16);
+  font-size: 0.68rem; font-weight: 500; color: var(--muted);
+}
+.msg-transmit-sending { opacity: 1; }
+.msg-transmit-done { opacity: 0; }
+.msg-transmit-done .plan-foot-check { width: 14px; height: 14px; }
+.stepper-panel.active .msg-transmit { animation: pdFloatIn 0.5s cubic-bezier(0.34,1.4,0.64,1) 4.9s both; }
+.stepper-panel.active .msg-transmit .msg-transmit-sending { animation: mstFadeOut 0.4s ease 5.7s both; }
+.stepper-panel.active .msg-transmit .msg-transmit-done   { animation: mstFadeIn 0.4s ease 5.7s both; }
+@keyframes mstFadeOut { to { opacity: 0; } }
+@keyframes mstFadeIn  { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .msg-transmit-sending { opacity: 0; }
+  .msg-transmit-done { opacity: 1; }
+}
+.stepper-panel.active .msg.pd-f1 { animation: pdFloatIn 0.5s cubic-bezier(0.34,1.4,0.64,1) 0.4s both; }
+.stepper-panel.active .msg.pd-f2 { animation: pdFloatIn 0.5s cubic-bezier(0.34,1.4,0.64,1) 2.1s both; }
+.stepper-panel.active .msg.pd-f3 { animation: pdFloatIn 0.5s cubic-bezier(0.34,1.4,0.64,1) 4.3s both; }
+@media (prefers-reduced-motion: reduce) { .msg { opacity: 1 !important; animation: none !important; } }
+
+/* ── Badge « validé par le médecin » ── */
+.pd-validated {
+  display: flex; align-items: center; gap: 8px;
+}
+.pd-doctor-avatar {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, #5a2a4a, #3a1c33);
+  color: #fff; font-size: 0.58rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.pd-validated-text { font-size: 0.68rem; color: var(--muted); line-height: 1.3; }
+.pd-validated-text strong { color: var(--ink); font-weight: 600; }
+.pd-validated-check {
+  margin-left: auto; width: 18px; height: 18px; border-radius: 50%;
+  background: #2a9e5f; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
+/* ═══ Compositions « produit » (fond teinté sans photo) ═══ */
+.sp-scene.sp-scene-tint {
+  flex-direction: column; gap: 16px; padding: 30px;
+}
+/* Halo diffus (ambiance, pas de rectangle) — étapes produit 2 & 4 */
+.sp-scene-tint::before, .sp-scene-phone::before {
+  content: ''; position: absolute; left: 50%; top: 50%;
+  width: 108%; height: 108%; transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(142,112,138,0.20) 0%, rgba(142,112,138,0) 62%);
+  filter: blur(55px);
+  z-index: 0; pointer-events: none;
+}
+.sp-scene-tint > *, .sp-scene-phone > * { position: relative; z-index: 1; }
+
+/* ── Étape 2 : le bilan devient le héros (composition produit) ── */
+.bilan-report {
+  width: 100%; max-width: 378px; background: #fff;
+  border: 1px solid #ECECEC; border-radius: 24px;
+  padding: 34px 34px 30px;
+  box-shadow: 0 12px 44px rgba(38,18,34,0.07);
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+.bilan-report-label {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted);
+}
+/* Score héros */
+.bilan-hero { text-align: center; padding: 28px 0 26px; }
+.bilan-hero-num {
+  font-size: 5.2rem; font-weight: 700; color: var(--ink);
+  line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums;
+}
+.bilan-hero-interp { font-size: 1.12rem; font-weight: 600; color: var(--ink); margin-top: 13px; }
+.bilan-hero-evo {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.74rem; color: #1f7a4a; margin-top: 15px;
+}
+/* Lecture en un regard */
+.bilan-read {
+  border-top: 1px solid #F1F1F1; padding-top: 26px;
+  display: flex; gap: 28px;
+}
+.bilan-read-group { flex: 1; }
+.bilan-read-label {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 13px;
+}
+.bilan-read-line {
+  display: flex; align-items: center; gap: 9px;
+  font-size: 0.86rem; font-weight: 500; color: var(--ink);
+}
+.bilan-read-line + .bilan-read-line { margin-top: 11px; }
+.bilan-read-ic { flex-shrink: 0; display: flex; }
+.bilan-read-ic svg {
+  width: 15px; height: 15px; fill: none; stroke: currentColor;
+  stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
+}
+.bilan-read-good .bilan-read-ic  { color: #2a9e5f; }
+.bilan-read-watch .bilan-read-ic { color: #f59e0b; }
+
+/* ── Étape 4 : le téléphone devient le héros ── */
+.sp-scene.sp-scene-phone {
+  padding: 30px 0;
+}
+.sp-phone {
+  width: 270px; background: #14101a;
+  border-radius: 42px; border: 10px solid #14101a;
+  box-shadow: 0 40px 90px rgba(38,18,34,0.32);
+  position: relative;
+}
+.sp-phone-notch {
+  position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+  width: 74px; height: 20px; background: #14101a; border-radius: 20px; z-index: 3;
+}
+.sp-phone-screen {
+  background: #fff; border-radius: 32px; padding: 20px 18px 22px; overflow: hidden;
+}
+.ph-status {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.62rem; font-weight: 700; color: var(--ink); margin-bottom: 18px;
+}
+.ph-head {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;
+}
+.ph-title { font-size: 1.02rem; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
+.ph-dots { color: var(--faint); font-weight: 700; letter-spacing: 1px; }
+.ph-sec { margin-bottom: 18px; }
+.ph-sec:last-child { margin-bottom: 0; }
+.ph-sec-label { font-size: 0.78rem; font-weight: 600; color: var(--ink); margin-bottom: 9px; }
+.ph-streak-sub { font-size: 0.72rem; color: var(--muted); margin: 8px 0 10px; }
+.ph-week { display: flex; justify-content: space-between; }
+.ph-day { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ph-day-dot {
+  width: 22px; height: 22px; border-radius: 50%; background: #ece8f0;
+  display: flex; align-items: center; justify-content: center;
+}
+.ph-day-dot.done { background: #2a9e5f; }
+.ph-day-label { font-size: 0.56rem; color: var(--muted); font-weight: 600; }
+.ph-divider { height: 1px; background: #f0ecf3; margin: 16px 0; }
+.ph-rem { display: flex; align-items: center; gap: 11px; }
+.ph-rem + .ph-rem { margin-top: 13px; }
+.ph-rem-icon {
+  width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.ph-rem-name { font-size: 0.74rem; font-weight: 600; color: var(--ink); }
+.ph-rem-sub  { font-size: 0.62rem; color: var(--muted); margin-top: 1px; }
+.ph-rdv {
+  display: flex; align-items: center; justify-content: space-between;
+  background: #f7f4fa; border-radius: 12px; padding: 12px 14px;
+}
+.ph-rdv-date { font-size: 0.78rem; font-weight: 600; color: var(--ink); }
+.ph-rdv-time { font-size: 0.64rem; color: var(--muted); margin-top: 1px; }
+.ph-rdv-cal {
+  width: 34px; height: 34px; border-radius: 10px; background: var(--bordeaux);
+  color: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
+/* ── Animation d'entrée des cartes flottantes ── */
+@keyframes pdFloatIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.pd-float { opacity: 0; }
+.stepper-panel.active .pd-f1 { animation: pdFloatIn 0.55s cubic-bezier(0.34,1.4,0.64,1) 0.15s both; }
+.stepper-panel.active .pd-f2 { animation: pdFloatIn 0.55s cubic-bezier(0.34,1.4,0.64,1) 0.32s both; }
+.stepper-panel.active .pd-f3 { animation: pdFloatIn 0.55s cubic-bezier(0.34,1.4,0.64,1) 0.49s both; }
+.stepper-panel.active .pd-f4 { animation: pdFloatIn 0.55s cubic-bezier(0.34,1.4,0.64,1) 0.66s both; }
+.stepper-panel.active .pd-gauge-fill { animation: pdGaugeFill 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-float { opacity: 1; }
+  .stepper-panel.active [class*="pd-f"] { animation: none; }
+  .pd-gauge-fill { width: var(--w); animation: none; }
+}
+
+@media (max-width: 768px) {
+  .stepper-panel { grid-template-columns: 1fr; gap: 28px; }
+  .sp-scene { max-width: 440px; margin: 0 auto; padding: 24px; }
+  .pd-float { padding: 10px 12px; }
+  .pd-check-label, .pd-synth-body, .pd-bubble { font-size: 0.72rem; }
+}
+
+/* ── BLOC · PHONE SCROLL ─────────────────────── */
+.bloc-phone-scroll {
+  background: #0c0810;
+  padding: 120px 8% 160px;
+  color: white;
+}
+.bps-header {
+  max-width: 680px;
+  margin: 0 auto 100px;
+  text-align: center;
+}
+.bps-eyebrow {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.bps-title {
+  font-size: clamp(1.8rem, 3vw, 3.2rem);
+  font-weight: 600;
+  color: white;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+.bps-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: start;
+}
+.bps-steps { display: flex; flex-direction: column; }
+.bps-step {
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 0;
+  opacity: 0.25;
+  transition: opacity 0.6s ease;
+}
+.bps-step.bps-active { opacity: 1; }
+.bps-step-num {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: #6b2458;
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+.bps-step-heading {
+  font-size: clamp(1.2rem, 1.8vw, 1.65rem);
+  font-weight: 600;
+  color: white;
+  letter-spacing: -0.018em;
+  line-height: 1.2;
+  margin: 0 0 14px;
+}
+.bps-step-body {
+  font-size: 0.97rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.65;
+  max-width: 360px;
+  margin: 0;
+}
+.bps-phone-wrap {
+  position: sticky;
+  top: calc(50vh - 270px);
+  display: flex;
+  justify-content: center;
+}
+.bps-phone {
+  width: 258px;
+  height: 536px;
+  background: #111115;
+  border-radius: 44px;
+  border: 8px solid #2c2c32;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.07);
+  position: relative;
+  overflow: hidden;
+}
+.bps-phone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 28px;
+  background: #111115;
+  border-radius: 0 0 16px 16px;
+  z-index: 20;
+}
+.bps-screen {
+  position: absolute;
+  inset: 0;
+  background: #f8f9fb;
+  padding: 48px 16px 16px;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+  overflow: hidden;
+  z-index: 1;
+}
+.bps-screen.bps-screen-active { opacity: 1; z-index: 2; }
+.bps-statusbar {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 14px;
+}
+.bps-app-logo {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #3a1c33;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+.bps-greeting {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #101010;
+  margin-bottom: 16px;
+}
+.bps-card {
+  background: white;
+  border-radius: 13px;
+  padding: 13px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  margin-bottom: 10px;
+}
+.bps-card-label {
+  font-size: 0.56rem;
+  letter-spacing: 0.07em;
+  color: #aaa;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 9px;
+}
+.bps-doc-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.bps-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: #EEEAF7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.56rem;
+  font-weight: 700;
+  color: #3a1c33;
+  flex-shrink: 0;
+}
+.bps-doc-name { font-size: 0.68rem; font-weight: 600; color: #101010; }
+.bps-doc-spec { font-size: 0.58rem; color: #999; }
+.bps-time-row { font-size: 0.6rem; color: #666; margin-bottom: 10px; }
+.bps-cta-btn {
+  width: 100%;
+  background: #3a1c33;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--f, inherit);
+}
+.bps-notif-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: white;
+  border-radius: 10px;
+  padding: 10px 11px;
+  font-size: 0.58rem;
+  color: #444;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+}
+.bps-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #6b2458;
+  flex-shrink: 0;
+}
+/* Messagerie */
+.bps-msg-header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 14px;
+}
+.bps-back { font-size: 1rem; color: #3a1c33; }
+.bps-avatar-round {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: #EEEAF7;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.54rem; font-weight: 700; color: #3a1c33;
+}
+.bps-msg-name { font-size: 0.68rem; font-weight: 600; color: #101010; }
+.bps-msg-sub { font-size: 0.56rem; color: #bbb; }
+.bps-bubbles { display: flex; flex-direction: column; gap: 7px; margin-bottom: 12px; }
+.bps-bubble {
+  max-width: 86%;
+  padding: 8px 10px;
+  border-radius: 13px;
+  font-size: 0.64rem;
+  line-height: 1.45;
+}
+.bps-bubble-in {
+  background: white;
+  color: #101010;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.bps-bubble-out {
+  background: #3a1c33;
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+.bps-msg-input {
+  background: white;
+  border-radius: 18px;
+  padding: 8px 12px;
+  font-size: 0.6rem;
+  color: #ccc;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+}
+/* Résultats */
+.bps-res-header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 4px;
+}
+.bps-res-title { font-size: 0.82rem; font-weight: 600; color: #101010; }
+.bps-res-date { font-size: 0.57rem; color: #bbb; margin-bottom: 14px; padding-left: 22px; }
+.bps-res-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.bps-res-name { font-size: 0.64rem; color: #555; }
+.bps-res-val { font-size: 0.64rem; font-weight: 600; }
+.bps-ok { color: #2a7d5a; }
+.bps-warn { color: #c07a1a; }
+.bps-res-note { font-size: 0.57rem; color: #bbb; text-align: center; margin-top: 13px; }
+/* Rappel */
+.bps-reminder-card {
+  background: white;
+  border-radius: 13px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  margin-bottom: 10px;
+}
+.bps-reminder-icon { font-size: 1.5rem; margin-bottom: 6px; }
+.bps-reminder-title { font-size: 0.74rem; font-weight: 700; color: #101010; margin-bottom: 6px; }
+.bps-reminder-sub { font-size: 0.59rem; color: #777; line-height: 1.5; margin-bottom: 10px; }
+.bps-upcoming {
+  background: white;
+  border-radius: 13px;
+  padding: 11px 13px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+}
+.bps-upcoming-label {
+  font-size: 0.56rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #aaa;
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+.bps-upcoming-item {
+  font-size: 0.6rem;
+  color: #555;
+  padding: 5px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+.bps-upcoming-item:last-child { border-bottom: none; }
+
+/* Cover zoom */
+#bpsCover {
+  position: fixed;
+  inset: 0;
+  background: #0c0810;
+  clip-path: circle(0% at 75% 50%);
+  z-index: 500;
+  pointer-events: none;
+  will-change: clip-path;
+}
+
+/* Écran 3 — IA sombre */
+.bps-screen-ia { background: #0c0810; }
+.bps-ia-statusbar {
+  display: flex; justify-content: space-between;
+  font-size: 0.6rem; font-weight: 700; color: rgba(255,255,255,0.6);
+  margin-bottom: 20px;
+}
+.bps-ia-logo {
+  font-size: 0.82rem; font-weight: 700;
+  color: rgba(255,255,255,0.9); letter-spacing: -0.01em;
+  margin-bottom: 32px;
+}
+.bps-ia-question {
+  font-size: 1.15rem; font-weight: 600; line-height: 1.25;
+  color: white; letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.bps-ia-chips { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.bps-ia-chip {
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 100px;
+  padding: 8px 14px;
+  font-size: 0.62rem;
+  color: rgba(255,255,255,0.7);
+  width: fit-content;
+}
+.bps-ia-lock {
+  font-size: 0.55rem; color: rgba(255,255,255,0.25);
+  margin-top: auto; text-align: center;
+  position: absolute; bottom: 20px; left: 0; right: 0;
+}
+
+/* ── BLOC IA — CONVERSATION ──────────────────── */
+/* ─── BLOC IA · IMMERSIF ─── */
+.bloc-ia {
+  background: #0c0810;
+  padding: 130px 8% 150px;
+  position: relative;
+  overflow: hidden;
+  margin-top: -2px;
+}
+
+.bloc-ia::before {
+  content: '';
+  position: absolute;
+  width: 900px; height: 900px;
+  background: radial-gradient(circle, rgba(58,28,51,0.5) 0%, transparent 68%);
+  top: -300px; left: -250px;
+  pointer-events: none;
+}
+
+/* Intro : titre + sous-titre empilés, centrés */
+.ia-intro {
+  max-width: 680px;
+  margin: 0 auto 72px;
+  text-align: center;
+}
+
+.ia-title {
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  color: white;
+  font-weight: 600;
+  line-height: 1.13;
+  letter-spacing: -0.022em;
+  margin: 0 0 18px;
+}
+
+.ia-sub {
+  font-size: 1.02rem;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.72;
+  margin: 0;
+}
+
+/* ─── Grand champ ─── */
+.ia-prompt-zone {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.ia-prompt-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 22px;
+  padding: 24px 24px 24px 32px;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: text;
+}
+
+.ia-prompt-field:hover,
+.ia-prompt-field:focus-within {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(255,255,255,0.24);
+}
+
+.ia-prompt-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: var(--f);
+  font-size: 1.12rem;
+  color: white;
+  caret-color: white;
+}
+
+.ia-prompt-input::placeholder {
+  color: rgba(255,255,255,0.32);
+}
+
+.ia-prompt-send {
+  width: 46px; height: 46px;
+  background: white;
+  border-radius: 13px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.18s;
+  border: none;
+}
+
+.ia-prompt-send:hover { background: #f0eef8; transform: scale(1.04); }
+
+.ia-prompt-send svg {
+  width: 18px; height: 18px;
+  stroke: var(--bordeaux); fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* Suggestions */
+.ia-suggestions {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ia-suggestion {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-family: var(--f);
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.78);
+  cursor: pointer;
+  transition: border-color 0.18s, color 0.18s, background 0.18s;
+}
+
+.ia-suggestion:hover {
+  border-color: rgba(255,255,255,0.5);
+  color: white;
+  background: rgba(255,255,255,0.07);
+}
+
+/* Réassurance */
+.ia-reassurance {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.28);
+  letter-spacing: 0.03em;
+}
+
+.ia-reassurance-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #3ecf8e;
+  box-shadow: 0 0 6px rgba(62,207,142,0.5);
+  flex-shrink: 0;
+}
+
+/* ─── Conversation (cachée par défaut) ─── */
+.ia-scene {
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 56px auto 0;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.6s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease;
+}
+
+.ia-scene.ia-scene-open {
+  max-height: 900px;
+  opacity: 1;
+}
+
+/* Animation messages */
+.ia-anim {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.ia-anim.ia-visible { opacity: 1; transform: translateY(0); }
+
+/* Message patient */
+.ia-row-patient {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.ia-bubble-patient {
+  background: #6b2458;
+  color: white;
+  border-radius: 22px 22px 5px 22px;
+  padding: 16px 22px;
+  font-size: 1.05rem;
+  line-height: 1.58;
+  max-width: 62%;
+  font-family: var(--f);
+  box-shadow: 0 4px 24px rgba(107,36,88,0.4);
+}
+
+.ia-msg-time {
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.25);
+  margin-top: 6px;
+  text-align: right;
+}
+
+/* Typing */
+.ia-typing {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-left: 52px;
+}
+
+.ia-typing-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  animation: iaDot 1.2s infinite;
+}
+.ia-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.ia-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes iaDot {
+  0%, 60%, 100% { opacity: 0.2; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-4px); }
+}
+
+/* Message AMIA */
+.ia-row-amia {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.ia-amia-logo {
+  width: 38px; height: 38px;
+  background: var(--bordeaux);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.ia-amia-logo svg { width: 19px; }
+
+.ia-bubble-amia {
+  background: rgba(255,255,255,0.11);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 5px 22px 22px 22px;
+  padding: 18px 22px;
+  font-size: 1.05rem;
+  line-height: 1.68;
+  color: rgba(255,255,255,0.92);
+  max-width: 76%;
+}
+
+.ia-dossier-tag {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.63rem;
+  color: rgba(255,255,255,0.62);
+  letter-spacing: 0.03em;
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.ia-dossier-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #3ecf8e;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(62,207,142,0.6);
+}
+
+.ia-bubble-note {
+  font-size: 0.62rem;
+  color: rgba(255,255,255,0.48);
+  margin-top: 8px;
+  padding-left: 2px;
+}
+
+/* Passage au médecin */
+.ia-handoff {
+  margin: 36px 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.ia-handoff-label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.82);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.ia-handoff-label::before {
+  content: '';
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #3ecf8e;
+  box-shadow: 0 0 8px rgba(62,207,142,0.7);
+  flex-shrink: 0;
+}
+
+.ia-handoff-text {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.82);
+  padding-left: 16px;
+  line-height: 1.5;
+}
+
+/* Message médecin */
+.ia-row-doctor {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.ia-doctor-avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #9a8070, #7b6050);
+  color: white;
+  font-size: 0.58rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+  border: 1.5px solid rgba(255,255,255,0.2);
+}
+
+.ia-bubble-doctor {
+  background: rgba(255,240,220,0.09);
+  border: 1px solid rgba(255,220,180,0.18);
+  border-radius: 5px 22px 22px 22px;
+  padding: 18px 22px;
+  font-size: 1.05rem;
+  line-height: 1.68;
+  color: rgba(255,255,255,0.9);
+  max-width: 76%;
+}
+
+.ia-doctor-name {
+  font-size: 0.63rem;
+  font-weight: 600;
+  color: rgba(255,220,180,0.82);
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.bloc-ia { position: relative; overflow: hidden; }
+</style>
+<style>
+@font-face { font-family: Brockmann-Medium; src: url('fonts/Brockmann-Medium.otf') format('opentype'); font-display: swap; }
+
+/* La nav du prototype flotte (fixed, top 20px, 78px de haut) : elle se termine
+   à 98px, il faut donc plus de dégagement que les 128px du site. */
+.mf { --ink: #101010; --ink-body: rgba(16,16,16,.88); --ink-muted: #5e6266;
+      --rule: rgba(58,28,51,.14); padding-top: 152px; }
+.mf-hero, .mf-body { width: calc(100% - 96px); max-width: 43.75rem; margin: 0 auto; }
+.mf p, .mf h1, .mf h2, .mf h3, .mf li { font-weight: 400; }
+
+@keyframes mf-settle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.mf-hero { padding-bottom: 78px; }
+.mf-title, .mf-byline { animation: mf-settle .6s cubic-bezier(.165,.84,.44,1) both; }
+.mf-byline { animation-delay: .08s; }
+@media (prefers-reduced-motion: reduce) { .mf-title, .mf-byline { animation: none; } }
+
+.mf-title { font-family: Brockmann-Semibold, sans-serif; font-size: clamp(2.375rem, 5.6vw, 4.125rem);
+  line-height: 1.04; letter-spacing: -.032em; color: var(--ink); text-wrap: balance; margin-bottom: 2.25rem; }
+.mf-byline { display: flex; flex-direction: column; gap: .2rem; }
+.mf-author { font-family: Brockmann-Semibold, sans-serif; font-size: 1.0625rem; line-height: 1.4;
+  letter-spacing: -.005em; color: var(--ink); }
+.mf-role, .mf-date { font-size: 1.0625rem; line-height: 1.4; color: var(--ink-muted); }
+.mf-date { margin-top: .45rem; }
+
+.mf-chapter + .mf-chapter { margin-top: 5.25rem; }
+.mf-chapter-title { font-family: Brockmann-Semibold, sans-serif;
+  font-size: clamp(1.75rem, 1.35rem + 1.35vw, 2.125rem); line-height: 1.2; letter-spacing: -.024em;
+  color: var(--ink); text-wrap: pretty; margin-bottom: 1.6rem; }
+
+.mf-p, .mf-conviction-text { font-size: clamp(1.125rem, .98rem + .42vw, 1.3125rem); line-height: 1.52;
+  letter-spacing: -.003em; color: var(--ink-body); text-wrap: pretty; }
+.mf-p + .mf-p { margin-top: 1.05em; }
+
+.mf-subhead { font-family: Brockmann-Semibold, sans-serif; font-size: clamp(1.375rem, 1.1rem + .6vw, 1.625rem);
+  line-height: 1.4; letter-spacing: -.013em; color: var(--ink); text-wrap: pretty; margin: 2.6rem 0 1.05rem; }
+
+.mf-convictions { margin: 1.05em 0; }
+.mf-conviction + .mf-conviction { margin-top: 1.45rem; }
+.mf-num { font-family: Brockmann-Medium, sans-serif; font-size: .8125rem; line-height: 1.4;
+  letter-spacing: .08em; font-variant-numeric: tabular-nums; color: var(--gold); margin-bottom: .2rem; }
+.mf-lead { font-family: Brockmann-Medium, sans-serif; color: var(--ink); }
+
+.mf-proof { font-family: Brockmann-Medium, sans-serif; font-size: clamp(1.125rem, .98rem + .42vw, 1.3125rem);
+  line-height: 1.52; letter-spacing: -.006em; color: var(--ink); text-wrap: pretty; margin: 1.9rem 0; }
+.mf-figure { font-family: Brockmann-Semibold, sans-serif; font-size: 1.34em; line-height: 1;
+  letter-spacing: -.02em; color: var(--ink); white-space: nowrap; }
+
+.mf-usecases { margin: 1.6rem 0; }
+.mf-list { list-style: none; }
+.mf-item { position: relative; font-size: clamp(1.0625rem, .98rem + .3vw, 1.25rem); line-height: 1.45;
+  letter-spacing: -.002em; color: var(--ink-body); text-wrap: pretty; padding-left: 1.4rem; }
+.mf-item + .mf-item { margin-top: .5rem; }
+.mf-mark { position: absolute; left: 0; color: var(--ink-muted); }
+.mf-conclusion { font-family: Brockmann-Medium, sans-serif;
+  font-size: clamp(1.125rem, .98rem + .42vw, 1.3125rem); line-height: 1.52; letter-spacing: -.006em;
+  color: var(--ink); text-wrap: pretty; margin-top: 1.35rem; }
+
+.mf-statement { font-family: Brockmann-Semibold, sans-serif;
+  font-size: clamp(1.4375rem, 1.15rem + 1.2vw, 1.875rem); line-height: 1.32; letter-spacing: -.02em;
+  color: var(--ink); text-wrap: pretty; margin: 3.5rem 0 .75rem; }
+
+.mf-steps { list-style: none; margin-top: 2.25rem; }
+.mf-step + .mf-step { margin-top: 2rem; }
+.mf-num-step { color: var(--ink-muted); margin-bottom: .35rem; }
+.mf-step-title { font-family: Brockmann-Semibold, sans-serif; font-size: clamp(1.375rem, 1.1rem + .6vw, 1.625rem);
+  line-height: 1.3; letter-spacing: -.016em; color: var(--ink); text-wrap: balance; margin-bottom: .3rem; }
+.mf-step-text { font-size: clamp(1.0625rem, .95rem + .38vw, 1.25rem); line-height: 1.52;
+  color: var(--ink-body); text-wrap: pretty; }
+
+.mf-closing { font-family: Brockmann-Semibold, sans-serif;
+  font-size: clamp(1.4375rem, 1.15rem + 1.2vw, 1.875rem); line-height: 1.3; letter-spacing: -.021em;
+  color: var(--ink); text-wrap: balance; margin-top: 2.75rem; }
+
+.mf-figure-block { margin: .6rem 0 2.75rem; }
+.mf-img { display: block; width: 100%; height: auto; border-radius: 10px; }
+
+.mf-signature { margin-top: 4.5rem; padding-bottom: 140px; }
+.mf-sign-placeholder { width: 190px; height: 68px; margin-bottom: .6rem; border-bottom: 1px solid var(--rule); }
+.mf-sign-name { font-family: Brockmann-Semibold, sans-serif; font-size: 1.0625rem; line-height: 1.4;
+  letter-spacing: -.005em; color: var(--ink); }
+
 @media (max-width: 700px) {
-  .signature { margin-top: 3.25rem; padding-bottom: 96px; }
-  .signature_placeholder { width: 160px; height: 56px; }
+  .mf { padding-top: 138px; }
+  .mf-hero, .mf-body { width: calc(100% - 48px); }
+  .mf-hero { padding-bottom: 54px; }
+  .mf-title { line-height: 1.08; letter-spacing: -.028em; margin-bottom: 1.75rem; }
+  .mf-chapter + .mf-chapter { margin-top: 3.5rem; }
+  .mf-chapter-title { margin-bottom: 1.2rem; }
+  .mf-subhead { margin: 2rem 0 .85rem; }
+  .mf-item { padding-left: 1.1rem; }
+  .mf-statement { font-size: clamp(1.3125rem, 1rem + 2.8vw, 1.625rem); line-height: 1.36; margin: 2.5rem 0 .5rem; }
+  .mf-statement br { display: none; }
+  .mf-steps { margin-top: 1.75rem; }
+  .mf-step + .mf-step { margin-top: 1.6rem; }
+  .mf-closing { font-size: clamp(1.25rem, 1rem + 2.6vw, 1.5rem); margin-top: 2rem; }
+  .mf-figure-block { margin: .4rem 0 2rem; }
+  .mf-signature { margin-top: 3.25rem; padding-bottom: 96px; }
+  .mf-sign-placeholder { width: 160px; height: 56px; }
 }
 </style>
 </head>
 <body>
-<nav class="nav"><a class="nav-logo" href="index.html"><svg viewBox="0 0 256 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+<nav class="nav-scrolled">
+  <a class="nav-logo" href="index.html">
+    <!-- Logo Primary complet (monogramme + lettrage), inline SVG -->
+    <svg class="nav-logo-mark" viewBox="0 0 256 54" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M180.716 41.7054C174.693 41.7054 170.177 38.4627 170.177 32.7438C170.177 27.1428 174.074 23.4284 180.983 23.0157L189.407 22.8125C189.407 20.6311 187.115 17.9741 182.864 17.9741C178.494 17.9741 176.613 20.4212 175.964 22.3079L170.059 19.301C171.889 14.9381 175.964 11.0469 183.05 11.0469C192.38 11.0469 196.808 17.1199 196.808 22.8388V41.7054H189.427V38.4627C187.951 40.7621 184.732 41.7054 180.716 41.7054ZM177.676 32.449C177.676 34.5125 179.389 35.8096 181.81 35.8096C185.766 35.8096 189.545 33.2155 189.545 29.4421L189.552 28.9815L181.455 29.0294C178.983 29.0331 177.676 30.3855 177.676 32.449Z" fill="#3A1C33"/>
       <path d="M119.629 41.6884V11.6103H127.01V14.8035C128.368 12.3272 131.374 11.0352 135.154 11.0352C139.169 11.0352 142.363 12.2093 144.253 14.9214C145.906 12.7989 148.892 11.0352 153.793 11.0352C160.702 11.0352 165.747 15.5699 165.747 21.5247V41.6884H158.366V23.8241C158.366 19.9918 155.82 17.9739 152.395 17.9739C148.675 17.9739 146.379 20.2276 146.379 23.8241V41.6884H138.997V23.8241C138.997 19.9918 136.451 17.9579 133.026 17.9579C129.306 17.9579 127.01 20.2276 127.01 23.8241V41.6884H119.629Z" fill="#3A1C33"/>
       <path d="M107.816 41.7054V11.6152H115.198V41.7054H107.816Z" fill="#3A1C33"/>
@@ -137,25 +2784,94 @@ img { max-width: 100%; }
       <path d="M13.968 43.0024L20.8118 45.7632L25.9302 33.1149L25.9326 33.1169L33.52 14.3593L26.6762 11.5985L22.8925 20.9487L9.27739 9.54102L4.53281 15.1866L15.2297 24.1492L15.2318 24.1478L19.9858 28.1319L13.968 43.0024Z" fill="#3A1C33"/>
       <path d="M15.2508 33.0862L16.9594 28.8984L13.4261 25.9323L0 30.1883L2.23404 37.2125L15.2508 33.0862Z" fill="#3A1C33"/>
       <path d="M36.8234 32.6211L30.8761 27.638L27.97 34.824L32.0788 38.2666L36.8234 32.6211Z" fill="#3A1C33"/>
-    </svg></a></nav>
+    </svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Médecins</a></li>
+    <li><a href="#">Cabinets médicaux</a></li>
+    <li><a href="#">À propos</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <span class="active">FR</span>
+      <span>EN</span>
+    </div>
+    <a class="btn-secondary" href="#">Se connecter</a>
+    <a class="btn-primary" href="#">Commencer mon suivi</a>
+  </div>
+</nav>
 <main>
-<article class="manifeste">
-<header class="hero">
-<h1 class="title">Construire la médecine proactive</h1>
-<div class="byline">
-<p class="author">Thibault Lanthier</p>
-<p class="role">CEO &amp; cofondateur de Primary</p>
-<p class="date"><time datetime="2026-09-08">Septembre 2026</time></p>
+<article class="mf">
+<header class="mf-hero">
+<h1 class="mf-title">Construire la médecine proactive</h1>
+<div class="mf-byline">
+<p class="mf-author">Thibault Lanthier</p>
+<p class="mf-role">CEO &amp; cofondateur de Primary</p>
+<p class="mf-date"><time datetime="2026-09-08">Septembre 2026</time></p>
 </div>
 </header>
-<div class="body"><section class="chapter" id="introduction"><p class="p">Il y a trois ans, je publiais le manifeste de ce qui allait devenir Primary. Nous voulions construire un nouveau modèle de cabinet médical, en mettant la technologie au service des médecins et des patients.</p><p class="p">Depuis trois ans, nous avons construit en silence pour faire de cette vision une réalité. Nous avons ouvert une dizaine de cabinets. Des dizaines de médecins nous ont rejoints. Plus de 100 000 patients ont consulté et sont suivis dans nos cabinets. Nous avons constitué autour des médecins de véritables équipes de soins, développé nos propres outils et intégré l’IA directement dans le parcours patient.</p><p class="p">Mais ce n’est que le début.</p><p class="p">Notre ambition n’a jamais été de construire des « jolis » cabinets médicaux (même si on est fier du design de nos cabinets). Notre ambition est de construire un nouveau modèle de soins primaires. Un modèle qui repose sur :</p><div class="convictions"><div class="conviction"><p class="conviction_num">01</p><p class="conviction_text"><span class="conviction_lead">Une médecine proactive,</span> dont l’objectif n’est plus seulement de soigner la maladie, mais de permettre à chacun de vivre plus longtemps en bonne santé.</p></div><div class="conviction"><p class="conviction_num">02</p><p class="conviction_text"><span class="conviction_lead">Une nouvelle combinaison entre Médecin + IA,</span> dans laquelle l’IA prend en charge une partie croissante de l’information, de l’accompagnement et du suivi, sous supervision du médecin qui intervient là où son expertise, son jugement et la relation humaine ont le plus de valeur.</p></div><div class="conviction"><p class="conviction_num">03</p><p class="conviction_text"><span class="conviction_lead">Une médecine humaine et ancrée dans le monde réel,</span> autour du médecin traitant et d’une équipe qui connaît ses patients dans la durée.</p></div></div><p class="p">Nous avons construit les fondations de ce modèle. Désormais nous pouvons passer à la prochaine étape.</p></section><section class="chapter" id="de-soigner-la-maladie-a-maintenir-les-gens-en-bonne-sante"><h2 class="chapter_title">De soigner la maladie<br> à maintenir les gens en bonne santé</h2><p class="p">La médecine primaire (médecine générale) reste encore aujourd’hui principalement centrée sur le traitement des maladies. Quelque chose ne va pas. Le patient prend rendez-vous. Il voit son médecin. Le médecin diagnostique et traite. Puis, le plus souvent, chacun reprend sa vie jusqu’au prochain problème. Ce modèle a permis des progrès extraordinaires. Mais il repose sur une logique essentiellement réactive : nous intervenons lorsqu’un problème est déjà là.</p><p class="p">La prochaine grande transformation de la médecine sera de passer progressivement d’un système qui soigne principalement la maladie à un système dont l’objectif est de maintenir les gens en bonne santé le plus longtemps possible. Cela change profondément le point de départ de la médecine.</p><p class="p">Ne plus attendre qu’une maladie apparaisse pour agir, mais identifier les risques suffisamment tôt pour pouvoir les réduire. Ne plus s’intéresser uniquement aux symptômes et aux traitements, mais à ce qui détermine notre santé dans la durée : activité physique, sommeil, nutrition, santé mentale, comportements. Ne plus s’adresser uniquement aux personnes malades, mais accompagner les patients pour les aider à mieux prendre soin de leur capital santé.</p><p class="p">Une médecine qui ne demande plus seulement « Qu’est-ce qui ne va pas aujourd’hui ? », mais aussi « Que pouvons-nous faire aujourd’hui pour que vous soyez toujours en bonne santé dans dix ou vingt ans ? »</p></section><section class="chapter" id="l-ia-ouvre-la-possibilite-d-un-nouveau-modele-de-soins"><h2 class="chapter_title">L’IA ouvre la possibilité<br> d’un nouveau modèle de soins</h2><p class="p">Une médecine proactive requiert de pouvoir suivre un patient en continu sur la durée. Il faut pouvoir recueillir des informations, suivre des indicateurs, rappeler, expliquer, relancer, détecter qu’une situation nécessite une intervention. À l’échelle de milliers de patients, cela était jusqu’ici pratiquement impossible à mettre en œuvre pour un médecin.</p><h3 class="subhead">L’IA change radicalement cette contrainte.</h3><p class="p">L’IA est bien plus qu’un outil de productivité pour les médecins. Elle les complète. Et va leur permettre de faire à l’échelle ce qu’ils ont rarement le temps de faire en dehors des consultations : expliquer, écouter, accompagner, rappeler, suivre.</p><p class="p">Les patients utilisent déjà l’IA tous les jours pour comprendre un résultat, poser une question sur un symptôme, préparer une consultation ou chercher une première orientation. Mais aujourd’hui, ces usages se développent principalement en dehors du parcours de soins et sans lien avec le médecin qui connaît le patient.</p><p class="p">Or si l’IA peut remplacer certaines interactions qui nécessitaient auparavant du temps médical, elle ne supprime pas le besoin d’un médecin responsable de la prise en charge. L’enjeu est d’intégrer l’IA dans le parcours de soin. Construire une boucle médecin-patient-IA.</p><h3 class="subhead">Une nouvelle combinaison : Médecin + IA</h3><p class="p">Chez Primary, nous avons commencé par un cas d’usage très concret : la préconsultation. Avant son rendez-vous, notre assistant IA échange avec le patient pour comprendre le motif de sa venue, recueillir les informations pertinentes et préparer la consultation.</p><p class="proof">Aujourd’hui, <span class="proof_figure">80 %</span> des patients de nos cabinets préparent ainsi leur échange avant leur consultation.</p><p class="p">Le médecin retrouve son patient avec une partie du travail de recueil déjà réalisée et peut concentrer davantage son temps sur ce qui nécessite réellement son expertise : comprendre, examiner, décider, expliquer.</p><p class="p">Mais ce n’est qu’une première étape.</p><p class="p">L’IA peut apporter disponibilité, connaissance, personnalisation au quotidien entre les consultations.</p><div class="usecases"><ul class="usecases_list" role="list"><li class="usecase"><span class="usecase_mark" aria-hidden="true">&ndash;</span>Expliquer un résultat d’analyse.</li><li class="usecase"><span class="usecase_mark" aria-hidden="true">&ndash;</span>Répondre à une question qui ne justifierait pas nécessairement un rendez-vous.</li><li class="usecase"><span class="usecase_mark" aria-hidden="true">&ndash;</span>Demander quelques jours plus tard si des symptômes se sont améliorés.</li><li class="usecase"><span class="usecase_mark" aria-hidden="true">&ndash;</span>Vérifier qu’un examen a été réalisé.</li><li class="usecase"><span class="usecase_mark" aria-hidden="true">&ndash;</span>Accompagner un objectif d’activité physique, de sommeil ou de perte de poids.</li><li class="usecase"><span class="usecase_mark" aria-hidden="true">&ndash;</span>Rappeler un dépistage.</li></ul><p class="usecases_conclusion">Et surtout, identifier les situations dans lesquelles l’intervention de son médecin est nécessaire.</p></div><p class="p">Cela change le rôle du médecin. Il n’a plus vocation à être le seul point d’accès à la connaissance médicale. Sa valeur se concentre alors encore davantage sur ce qui fait le cœur de son métier : connaître son patient, comprendre son contexte, examiner, arbitrer dans l’incertitude, décider, rassurer et construire avec lui une stratégie de santé dans la durée.</p><p class="statement">Le médecin décide et supervise.<br class="statement_break"> L’IA accompagne et exécute ce qui peut l’être.</p></section><section class="chapter" id="faire-entrer-cette-nouvelle-medecine-dans-le-monde-reel"><h2 class="chapter_title">Faire entrer cette nouvelle médecine<br> dans le monde réel</h2><figure class="figure"><img class="figure_img" src="images/cabinet-entree.jpg" alt="Deux hommes se saluent devant l’entrée vitrée d’un cabinet Primary, l’un tenant un vélo, le logo Primary visible sur la vitre." width="1535" height="1025" loading="lazy" decoding="async"></figure><p class="p">Une autre conviction nous distingue : le digital seul ne suffira pas. La médecine restera aussi physique. Nous aurons toujours besoin d’être examinés, diagnostiqués, rassurés, accompagnés. Nous aurons besoin d’un médecin qui nous connaît et qui assume la responsabilité de notre prise en charge. L’enjeu est donc moins de faire disparaître le cabinet médical que de le faire entrer dans cette nouvelle ère.</p><p class="p">C’est précisément pour cela que nous avons commencé Primary par les cabinets. Cela nous permet de ne pas simplement imaginer cette nouvelle médecine, mais de la construire et de la tester chaque jour dans le monde réel, avec des médecins et des patients.</p><p class="p">Nos cabinets ne sont pas simplement des lieux dans lesquels nous réalisons des consultations. Nos cabinets sont l’infrastructure qui permet de construire ce nouveau modèle de soins.</p></section><section class="chapter" id="le-prochain-chapitre-de-primary"><h2 class="chapter_title">Le prochain chapitre de Primary</h2><p class="p">Notre ambition depuis le premier jour est de transformer les soins primaires. Nous avons passé trois ans à construire l’infrastructure nécessaire pour rendre cette nouvelle médecine possible. Notre plan pour les prochaines années est finalement assez simple :</p><ol class="steps"><li class="step"><p class="step_num">01</p><p class="step_title">Build the clinics</p><p class="step_text">Construire l’infrastructure physique et humaine d’une nouvelle médecine primaire.</p></li><li class="step"><p class="step_num">02</p><p class="step_title">Build the AI care team</p><p class="step_text">Combiner médecins, équipes de soins et IA pour offrir à chaque patient davantage de disponibilité, de connaissance et d’accompagnement.</p></li><li class="step"><p class="step_num">03</p><p class="step_title">Build continuous care</p><p class="step_text">Passer de consultations ponctuelles à une relation continue, avec un plan de santé suivi dans la durée sous la responsabilité du médecin traitant.</p></li><li class="step"><p class="step_num">04</p><p class="step_title">Make proactive medicine the new standard of care</p><p class="step_text">Déployer ce modèle à grande échelle pour permettre à des millions de personnes de vivre plus longtemps en bonne santé.</p></li></ol><p class="closing">D’abord en France. Puis en Europe.</p></section><div class="signature"><div class="signature_placeholder" role="img" aria-label="Signature de Thibault Lanthier"></div><p class="signature_name">Thibault</p></div></div>
+<div class="mf-body">
+<section class="mf-chapter" id="introduction"><p class="mf-p">Il y a trois ans, je publiais le manifeste de ce qui allait devenir Primary. Nous voulions construire un nouveau modèle de cabinet médical, en mettant la technologie au service des médecins et des patients.</p><p class="mf-p">Depuis trois ans, nous avons construit en silence pour faire de cette vision une réalité. Nous avons ouvert une dizaine de cabinets. Des dizaines de médecins nous ont rejoints. Plus de 100 000 patients ont consulté et sont suivis dans nos cabinets. Nous avons constitué autour des médecins de véritables équipes de soins, développé nos propres outils et intégré l’IA directement dans le parcours patient.</p><p class="mf-p">Mais ce n’est que le début.</p><p class="mf-p">Notre ambition n’a jamais été de construire des « jolis » cabinets médicaux (même si on est fier du design de nos cabinets). Notre ambition est de construire un nouveau modèle de soins primaires. Un modèle qui repose sur :</p><div class="mf-convictions"><div class="mf-conviction"><p class="mf-num">01</p><p class="mf-conviction-text"><span class="mf-lead">Une médecine proactive,</span> dont l’objectif n’est plus seulement de soigner la maladie, mais de permettre à chacun de vivre plus longtemps en bonne santé.</p></div><div class="mf-conviction"><p class="mf-num">02</p><p class="mf-conviction-text"><span class="mf-lead">Une nouvelle combinaison entre Médecin + IA,</span> dans laquelle l’IA prend en charge une partie croissante de l’information, de l’accompagnement et du suivi, sous supervision du médecin qui intervient là où son expertise, son jugement et la relation humaine ont le plus de valeur.</p></div><div class="mf-conviction"><p class="mf-num">03</p><p class="mf-conviction-text"><span class="mf-lead">Une médecine humaine et ancrée dans le monde réel,</span> autour du médecin traitant et d’une équipe qui connaît ses patients dans la durée.</p></div></div><p class="mf-p">Nous avons construit les fondations de ce modèle. Désormais nous pouvons passer à la prochaine étape.</p></section><section class="mf-chapter" id="de-soigner-la-maladie-a-maintenir-les-gens-en-bonne-sante"><h2 class="mf-chapter-title">De soigner la maladie<br> à maintenir les gens en bonne santé</h2><p class="mf-p">La médecine primaire (médecine générale) reste encore aujourd’hui principalement centrée sur le traitement des maladies. Quelque chose ne va pas. Le patient prend rendez-vous. Il voit son médecin. Le médecin diagnostique et traite. Puis, le plus souvent, chacun reprend sa vie jusqu’au prochain problème. Ce modèle a permis des progrès extraordinaires. Mais il repose sur une logique essentiellement réactive : nous intervenons lorsqu’un problème est déjà là.</p><p class="mf-p">La prochaine grande transformation de la médecine sera de passer progressivement d’un système qui soigne principalement la maladie à un système dont l’objectif est de maintenir les gens en bonne santé le plus longtemps possible. Cela change profondément le point de départ de la médecine.</p><p class="mf-p">Ne plus attendre qu’une maladie apparaisse pour agir, mais identifier les risques suffisamment tôt pour pouvoir les réduire. Ne plus s’intéresser uniquement aux symptômes et aux traitements, mais à ce qui détermine notre santé dans la durée : activité physique, sommeil, nutrition, santé mentale, comportements. Ne plus s’adresser uniquement aux personnes malades, mais accompagner les patients pour les aider à mieux prendre soin de leur capital santé.</p><p class="mf-p">Une médecine qui ne demande plus seulement « Qu’est-ce qui ne va pas aujourd’hui ? », mais aussi « Que pouvons-nous faire aujourd’hui pour que vous soyez toujours en bonne santé dans dix ou vingt ans ? »</p></section><section class="mf-chapter" id="l-ia-ouvre-la-possibilite-d-un-nouveau-modele-de-soins"><h2 class="mf-chapter-title">L’IA ouvre la possibilité<br> d’un nouveau modèle de soins</h2><p class="mf-p">Une médecine proactive requiert de pouvoir suivre un patient en continu sur la durée. Il faut pouvoir recueillir des informations, suivre des indicateurs, rappeler, expliquer, relancer, détecter qu’une situation nécessite une intervention. À l’échelle de milliers de patients, cela était jusqu’ici pratiquement impossible à mettre en œuvre pour un médecin.</p><h3 class="mf-subhead">L’IA change radicalement cette contrainte.</h3><p class="mf-p">L’IA est bien plus qu’un outil de productivité pour les médecins. Elle les complète. Et va leur permettre de faire à l’échelle ce qu’ils ont rarement le temps de faire en dehors des consultations : expliquer, écouter, accompagner, rappeler, suivre.</p><p class="mf-p">Les patients utilisent déjà l’IA tous les jours pour comprendre un résultat, poser une question sur un symptôme, préparer une consultation ou chercher une première orientation. Mais aujourd’hui, ces usages se développent principalement en dehors du parcours de soins et sans lien avec le médecin qui connaît le patient.</p><p class="mf-p">Or si l’IA peut remplacer certaines interactions qui nécessitaient auparavant du temps médical, elle ne supprime pas le besoin d’un médecin responsable de la prise en charge. L’enjeu est d’intégrer l’IA dans le parcours de soin. Construire une boucle médecin-patient-IA.</p><h3 class="mf-subhead">Une nouvelle combinaison : Médecin + IA</h3><p class="mf-p">Chez Primary, nous avons commencé par un cas d’usage très concret : la préconsultation. Avant son rendez-vous, notre assistant IA échange avec le patient pour comprendre le motif de sa venue, recueillir les informations pertinentes et préparer la consultation.</p><p class="mf-proof">Aujourd’hui, <span class="mf-figure">80 %</span> des patients de nos cabinets préparent ainsi leur échange avant leur consultation.</p><p class="mf-p">Le médecin retrouve son patient avec une partie du travail de recueil déjà réalisée et peut concentrer davantage son temps sur ce qui nécessite réellement son expertise : comprendre, examiner, décider, expliquer.</p><p class="mf-p">Mais ce n’est qu’une première étape.</p><p class="mf-p">L’IA peut apporter disponibilité, connaissance, personnalisation au quotidien entre les consultations.</p><div class="mf-usecases"><ul class="mf-list" role="list"><li class="mf-item"><span class="mf-mark" aria-hidden="true">&ndash;</span>Expliquer un résultat d’analyse.</li><li class="mf-item"><span class="mf-mark" aria-hidden="true">&ndash;</span>Répondre à une question qui ne justifierait pas nécessairement un rendez-vous.</li><li class="mf-item"><span class="mf-mark" aria-hidden="true">&ndash;</span>Demander quelques jours plus tard si des symptômes se sont améliorés.</li><li class="mf-item"><span class="mf-mark" aria-hidden="true">&ndash;</span>Vérifier qu’un examen a été réalisé.</li><li class="mf-item"><span class="mf-mark" aria-hidden="true">&ndash;</span>Accompagner un objectif d’activité physique, de sommeil ou de perte de poids.</li><li class="mf-item"><span class="mf-mark" aria-hidden="true">&ndash;</span>Rappeler un dépistage.</li></ul><p class="mf-conclusion">Et surtout, identifier les situations dans lesquelles l’intervention de son médecin est nécessaire.</p></div><p class="mf-p">Cela change le rôle du médecin. Il n’a plus vocation à être le seul point d’accès à la connaissance médicale. Sa valeur se concentre alors encore davantage sur ce qui fait le cœur de son métier : connaître son patient, comprendre son contexte, examiner, arbitrer dans l’incertitude, décider, rassurer et construire avec lui une stratégie de santé dans la durée.</p><p class="mf-statement">Le médecin décide et supervise.<br> L’IA accompagne et exécute ce qui peut l’être.</p></section><section class="mf-chapter" id="faire-entrer-cette-nouvelle-medecine-dans-le-monde-reel"><h2 class="mf-chapter-title">Faire entrer cette nouvelle médecine<br> dans le monde réel</h2><figure class="mf-figure-block"><img class="mf-img" src="images/cabinet-entree.jpg" alt="Deux hommes se saluent devant l’entrée vitrée d’un cabinet Primary, l’un tenant un vélo, le logo Primary visible sur la vitre." width="1535" height="1025" loading="lazy" decoding="async"></figure><p class="mf-p">Une autre conviction nous distingue : le digital seul ne suffira pas. La médecine restera aussi physique. Nous aurons toujours besoin d’être examinés, diagnostiqués, rassurés, accompagnés. Nous aurons besoin d’un médecin qui nous connaît et qui assume la responsabilité de notre prise en charge. L’enjeu est donc moins de faire disparaître le cabinet médical que de le faire entrer dans cette nouvelle ère.</p><p class="mf-p">C’est précisément pour cela que nous avons commencé Primary par les cabinets. Cela nous permet de ne pas simplement imaginer cette nouvelle médecine, mais de la construire et de la tester chaque jour dans le monde réel, avec des médecins et des patients.</p><p class="mf-p">Nos cabinets ne sont pas simplement des lieux dans lesquels nous réalisons des consultations. Nos cabinets sont l’infrastructure qui permet de construire ce nouveau modèle de soins.</p></section><section class="mf-chapter" id="le-prochain-chapitre-de-primary"><h2 class="mf-chapter-title">Le prochain chapitre de Primary</h2><p class="mf-p">Notre ambition depuis le premier jour est de transformer les soins primaires. Nous avons passé trois ans à construire l’infrastructure nécessaire pour rendre cette nouvelle médecine possible. Notre plan pour les prochaines années est finalement assez simple :</p><ol class="mf-steps"><li class="mf-step"><p class="mf-num mf-num-step">01</p><p class="mf-step-title">Build the clinics</p><p class="mf-step-text">Construire l’infrastructure physique et humaine d’une nouvelle médecine primaire.</p></li><li class="mf-step"><p class="mf-num mf-num-step">02</p><p class="mf-step-title">Build the AI care team</p><p class="mf-step-text">Combiner médecins, équipes de soins et IA pour offrir à chaque patient davantage de disponibilité, de connaissance et d’accompagnement.</p></li><li class="mf-step"><p class="mf-num mf-num-step">03</p><p class="mf-step-title">Build continuous care</p><p class="mf-step-text">Passer de consultations ponctuelles à une relation continue, avec un plan de santé suivi dans la durée sous la responsabilité du médecin traitant.</p></li><li class="mf-step"><p class="mf-num mf-num-step">04</p><p class="mf-step-title">Make proactive medicine the new standard of care</p><p class="mf-step-text">Déployer ce modèle à grande échelle pour permettre à des millions de personnes de vivre plus longtemps en bonne santé.</p></li></ol><p class="mf-closing">D’abord en France. Puis en Europe.</p></section>
+<div class="mf-signature">
+<div class="mf-sign-placeholder" role="img" aria-label="Signature de Thibault Lanthier"></div>
+<p class="mf-sign-name">Thibault</p>
+</div>
+</div>
 </article>
 </main>
-<script>
-// Le header prend un filet au scroll, comme sur le site. Rien d'autre ne bouge.
-addEventListener('scroll', function () {
-  document.querySelector('.nav').classList.toggle('is-scrolled', scrollY > 10);
-}, { passive: true });
-</script>
+<footer>
+  <div class="footer-wrap">
+    <div class="footer-line"></div>
+
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Notre offre</h4>
+        <div class="footer-col-links">
+          <a href="#">Espace patient</a>
+          <a href="#">Programme Primary</a>
+          <a href="#">Pour les médecins</a>
+          <a href="#">Nos cabinets</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>À propos de nous</h4>
+        <div class="footer-col-links">
+          <a href="#">Notre histoire</a>
+          <a href="#">Recrutement</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <div class="footer-col-links">
+          <a href="#">CGU</a>
+          <a href="#">Politique de confidentialité du site</a>
+          <a href="#">Politique de confidentialité de l'application</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <div class="footer-col-links footer-social">
+          <a href="https://www.linkedin.com/company/helloprimary/about/" target="_blank" rel="noreferrer" aria-label="LinkedIn Primary">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.58c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.68H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.11 20.45H3.56V9h3.55v11.45z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <svg class="footer-wordmark" viewBox="0 0 1210 197" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M853.787 197.125C825.363 197.125 804.048 181.798 804.048 154.767C804.048 128.293 822.44 110.736 855.045 108.785L894.803 107.825C894.803 97.514 883.987 84.9555 863.922 84.9555C843.3 84.9555 834.423 96.5222 831.358 105.44L803.49 91.2274C812.129 70.6055 831.358 52.2129 864.799 52.2129C908.829 52.2129 929.73 80.9177 929.73 107.949V197.125H894.896V181.798C887.929 192.666 872.737 197.125 853.787 197.125ZM839.439 153.373C839.439 163.127 847.521 169.258 858.947 169.258C877.618 169.258 895.453 156.996 895.453 139.161L895.487 136.984L857.275 137.21C845.606 137.227 839.439 143.62 839.439 153.373Z"/>
+      <path d="M565.488 197.046V54.8766H600.323V69.9697C606.732 58.2653 620.919 52.1582 638.754 52.1582C657.704 52.1582 672.778 57.7079 681.696 70.527C689.499 60.4947 703.588 52.1583 726.718 52.1583C759.323 52.1583 783.134 73.5924 783.134 101.739V197.046H748.299V112.607C748.299 94.493 736.285 84.9553 720.122 84.9553C702.565 84.9553 691.728 95.6077 691.728 112.607V197.046H656.894V112.607C656.894 94.493 644.876 84.8796 628.713 84.8796C611.157 84.8796 600.323 95.6077 600.323 112.607V197.046H565.488Z"/>
+      <path d="M509.75 197.126V54.9004H544.584V197.126H509.75Z"/>
+      <path d="M396.23 54.8689V197.124H430.412V114.268C430.412 97.5869 441.077 85.008 458.305 85.008C466.971 84.484 475.286 88.5069 480.255 95.6276L481.306 97.135L497.599 60.5575L496.076 59.7811C488.061 55.6945 477.365 52.2113 468.127 52.2113C450.626 52.2113 436.702 60.944 430.412 72.4291V54.8689H396.23Z"/>
+      <path d="M230.457 255.239V54.8746H263.896V71.1927C272.189 60.2248 289.282 52.1947 308.275 52.1947C345.459 52.1947 377.052 79.218 377.052 124.427C377.052 167.229 345.727 197.128 308.275 197.128C289.282 197.128 271.921 188.362 263.896 177.394V255.239H230.457ZM265.12 124.427C265.12 146.898 279.411 163.33 303.22 163.33C327.296 163.33 341.32 146.898 341.32 124.427C341.32 101.689 327.296 85.2569 303.22 85.2569C279.411 85.2569 265.12 101.689 265.12 124.427Z"/>
+      <path d="M950.652 54.8709V197.126H984.834V114.27C984.834 97.5888 995.499 85.0099 1012.73 85.0099C1021.39 84.486 1029.71 88.5089 1034.68 95.6296L1035.73 97.1369L1052.02 60.5595L1050.5 59.7831C1042.48 55.6965 1031.79 52.2132 1022.55 52.2132C1005.05 52.2132 991.124 60.9459 984.834 72.431V54.8709H950.652Z"/>
+      <path d="M1136.58 141.299L1101.73 54.8772L1064.16 54.877L1117.79 187.624L1113.77 197.772L1090.56 255.219L1128.12 255.219L1209.07 54.8772L1171.5 54.8775L1136.58 141.299Z"/>
+      <path d="M527.162 42.6662C515.38 42.6662 505.826 33.1151 505.826 21.3331C505.826 9.55116 515.38 -1.44762e-06 527.162 -9.32617e-07C538.944 -4.17612e-07 548.498 9.55116 548.498 21.3331C548.498 33.1151 538.944 42.6662 527.162 42.6662Z"/>
+      <path d="M66.8488 203.258L99.1467 216.307L123.302 156.523L123.313 156.533L159.121 67.8721L126.823 54.8229L108.966 99.018L44.7125 45.0977L22.3214 71.7824L72.8031 114.146L72.8132 114.139L95.2486 132.97L66.8488 203.258Z"/>
+      <path d="M72.9027 156.388L80.9664 136.593L64.2917 122.574L0.929688 142.69L11.4728 175.891L72.9027 156.388Z"/>
+      <path d="M174.71 154.189L146.643 130.636L132.928 164.602L152.319 180.874L174.71 154.189Z"/>
+    </svg>
+  </div>
+</footer>
 </body>
 </html>
