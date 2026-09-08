@@ -1,4 +1,5 @@
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Primary — Homepage</title>
 <style>
 @font-face {
@@ -1340,8 +1341,14 @@ footer {
 
 /* ── UTILITIES ─────────────────────────────────── */
 @media (max-width: 768px) {
-  nav { padding: 0 1.75rem; }
-  .nav-links, .lang-switcher { display: none; }
+  /* La nav se cale sur la hauteur réelle du bandeau (voir --wf-h en fin de fichier) :
+     le décalage fixe de 20px était calibré sur un bandeau d'une seule ligne. */
+  nav { top: var(--wf-h, 20px); padding: 0 1.25rem; justify-content: space-between; }
+  .nav-logo { margin-right: 0; }
+  .nav-logo-mark { height: 22px; }
+  /* CTA unique dominant : « Se connecter » disparaît, la largeur ne permet pas les deux */
+  .nav-links, .lang-switcher, .btn-secondary { display: none; }
+  .btn-primary { font-size: 0.82rem; padding: 11px 18px; white-space: nowrap; }
   .hero-content { padding: 0 1.5rem 6rem; }
   .hero-title .nb { white-space: normal; }
   .bloc-vision, .bloc-programme { padding: 60px 1.5rem; }
@@ -3397,6 +3404,20 @@ function scrollCards(dir) {
     });
   });
 })();
+// Bandeau de maquette — expose sa hauteur réelle en --wf-h pour que la nav
+// se cale dessus. Il passe sur 2 ou 3 lignes en mobile selon la largeur, alors
+// que le `top` de la nav était un décalage fixe calibré sur le desktop.
+// Quand le bandeau sera retiré, la valeur de repli (20px) rétablit l'état actuel.
+(function(){
+  const wf = document.querySelector('.wf-banner');
+  if (!wf) return;
+  const sync = () => document.documentElement.style.setProperty('--wf-h', wf.offsetHeight + 'px');
+  sync();
+  if (window.ResizeObserver) new ResizeObserver(sync).observe(wf);
+  window.addEventListener('resize', sync);
+  window.addEventListener('orientationchange', sync);
+})();
+
 // Stepper parcours — piloté par le scroll (clic = raccourci)
 (function(){
   const tabs = Array.from(document.querySelectorAll('.stepper-tab'));
